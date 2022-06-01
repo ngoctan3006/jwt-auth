@@ -1,71 +1,76 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import User from '../models/user.js';
+import jwt from 'jsonwebtoken';
+import { USER } from '../constants';
+import { v4 as uuidv4 } from 'uuid';
+import { create, findOne } from '../utils/db_querry';
 
 dotenv.config();
 
 export const signin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password: pw } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await findOne(USER, { email });
     if (!existingUser) {
-      return res.status(404).json({ message: "User doesn't exist." });
+      return res.status(400).json({ message: 'Sai tên đăng nhập hoặc mật khẩu.' });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+    const isPasswordValid = await bcrypt.compare(pw, existingUser.password);
     if (!isPasswordValid) {
-      return res.status(400).json({ message: 'Invalid credentials.' });
+      return res.status(400).json({ message: 'Sai tên đăng nhập hoặc mật khẩu.' });
     }
 
     const token = jwt.sign(
       {
         email: existingUser.email,
-        id: existingUser._id,
+        id: existingUser.id,
       },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    res.json({
-      result: existingUser,
-      token,
-    });
+    const { password, ...user } = existingUser;
+
+    res.json({ user, token });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong.' });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const signup = async (req, res) => {
-  const { email, password, comfirmPassword, firstName, lastName } = req.body;
+  const { email, password: pw, comfirmPassword, ...rest } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await findOne(USER, { email });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exist.' });
+      return res.status(400).json({ message: 'Tài khoản đã tồn tại.' });
     }
 
-    if (password !== comfirmPassword) {
-      return res.status(400).json({ message: "Passwords don't match." });
+    if (pw !== comfirmPassword) {
+      return res.status(400).json({ message: 'Mật khẩu không khớp.' });
     }
 
-    const hasedPassword = await bcrypt.hash(password, 12);
-    const result = await User.create({
+    const hasedPassword = await bcrypt.hash(pw, 12);
+    const id = uuidv4();
+    const result = await create(USER, {
+      id,
       email,
       password: hasedPassword,
-      name: `${firstName} ${lastName}`,
+      ...rest,
     });
+
     const token = jwt.sign(
       {
-        email: result.email,
-        id: result._id,
+        email,
+        id,
       },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
-    res.status(201).json({ result, token });
+    const { password, ...user } = result;
+    res.status(201).json({ user, token });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong.' });
+    res.status(500).json({ message: error.message });
   }
 };
