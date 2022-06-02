@@ -13,8 +13,8 @@ DB_NAME = <db name>
 DB_PORT = <db port> (mặc định: 3306)
 ```
 
-Sử dụng `cd server` để đi tới thư mục `/server`
+Sử dụng `cd server` để đi tới thư mục `/server`.
 
 Sử dụng `npm i` hoặc `yarn` để cài các dependencies.
 
-Sử dụng `npm run dev` hoặc `yarn run dev` để chạy server trên môi trường development
+Sử dụng `npm run dev` hoặc `yarn run dev` để chạy server trên môi trường development.
