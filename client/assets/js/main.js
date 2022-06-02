@@ -4,12 +4,11 @@ function signup(e) {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
   const user = {
-    username: username,
-    email: email,
-    password: password,
+    username,
+    email,
+    password,
   };
-  const json = JSON.stringify(user);
-  localStorage.setItem(username, json);
+  localStorage.setItem(username, JSON.stringify(user));
   alert('Đăng ký thành công');
 }
 

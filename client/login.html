@@ -19,19 +19,19 @@
       <div class="wapper-heading">
         <h1>Đăng nhập</h1>
       </div>
-      <form onsubmit="login()">
+      <form onsubmit="login(event)">
         <div class="input__field">
-          <input id="username" type="text" placeholder="Tài khoản" />
+          <input name="username" type="text" placeholder="Tài khoản" />
         </div>
 
         <div class="input__field">
-          <input id="email" type="text" placeholder="Email" />
+          <input name="email" type="text" placeholder="Email" />
         </div>
         <div class="input__field">
-          <input id="password" type="password" placeholder="Mật khẩu" />
+          <input name="password" type="password" placeholder="Mật khẩu" />
         </div>
-        <a href="signup.html" class="signup-link">Đăng ký</a>
-        <button id="btn" class="btn">Đăng nhập</button>
+        <a href="./signup.html" class="signup-link">Đăng ký</a>
+        <button id="btn-login" class="btn">Đăng nhập</button>
       </form>
     </div>
     <script src="./assets/js/main.js"></script>
