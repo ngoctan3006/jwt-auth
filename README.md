@@ -1,6 +1,6 @@
 # Ứng dụng quản lý sinh viên
 
-Project sử dụng [NodeJS](https://nodejs.org/en/), [express](https://expressjs.com/)
+Project sử dụng [NodeJS](https://nodejs.org/en/), [express](https://expressjs.com/) và MySQL.
 
 Tạo file `.env` ở trong `/server` với nội dung:
 ```
