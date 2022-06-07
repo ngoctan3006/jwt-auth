@@ -185,8 +185,8 @@ CREATE TABLE `qldt_data`.`user` (
   `fullname` varchar(255),
   `birthday` date,
   `ma_khoa` varchar(5),
-  `address` varchar(255) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
+  `address` varchar(255),
+  `phone` varchar(20),
   `password` varchar(255) NOT NULL,
   `level` int,
   `time` datetime NOT NULL DEFAULT current_timestamp()
