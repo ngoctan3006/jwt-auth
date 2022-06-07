@@ -8,10 +8,10 @@ import { create, findOne } from '../utils/db_querry';
 dotenv.config();
 
 export const signin = async (req, res) => {
-  const { email, password: pw } = req.body;
+  const { username, password: pw } = req.body;
 
   try {
-    const existingUser = await findOne(USER, { email });
+    const existingUser = await findOne(USER, { username });
     if (!existingUser) {
       return res.status(400).json({ message: 'Sai tên đăng nhập hoặc mật khẩu.' });
     }
@@ -23,7 +23,7 @@ export const signin = async (req, res) => {
 
     const token = jwt.sign(
       {
-        email: existingUser.email,
+        username: existingUser.username,
         id: existingUser.id,
       },
       process.env.JWT_SECRET,
@@ -39,10 +39,10 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { email, password: pw, comfirmPassword, ...rest } = req.body;
+  const { username, password: pw, comfirmPassword, ...rest } = req.body;
 
   try {
-    const existingUser = await findOne(USER, { email });
+    const existingUser = await findOne(USER, { username });
     if (existingUser) {
       return res.status(400).json({ message: 'Tài khoản đã tồn tại.' });
     }
@@ -55,14 +55,14 @@ export const signup = async (req, res) => {
     const id = uuidv4();
     const result = await create(USER, {
       id,
-      email,
+      username,
       password: hasedPassword,
       ...rest,
     });
 
     const token = jwt.sign(
       {
-        email,
+        username,
         id,
       },
       process.env.JWT_SECRET,
