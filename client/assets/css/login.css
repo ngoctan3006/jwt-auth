@@ -7,14 +7,14 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 :root {
-  --bg--color: #35acc1;
-  --primary--color: #fff;
+  --bg--color: #e0dbdb;
+  --primary--color: rgb(247, 245, 245);
   --secondary--color: #a4ebf3;
   --gray--color: #aaaaaa;
 }
 .wapper {
   margin-top: 120px;
-  width: 300px;
+  width: 500px;
   background-color: var(--primary--color);
   padding: 10px 30px 30px;
   border-radius: 10px;
@@ -24,23 +24,24 @@ body {
   margin-bottom: 10px;
   height: 45px;
   width: 100%;
-  border: 1px solid #0093ab;
+  border: 1px solid #010b0c;
   outline: none;
   border-radius: 10px;
 }
 .wapper .btn {
-  padding: 12px 19px;
+  padding: 12px 35px;
   border: none;
   outline: none;
   border-radius: 5px;
   background: var(--bg--color);
   transition: all 0.2s linear;
+  font-size: large;
 }
 .btn:hover {
   transform: scale(1.1);
 }
 .wapper input:focus {
-  border: 1px solid var(--bg--color);
+  border: 1px solid #010b0c;
 }
 .wapper input::placeholder {
   color: black;
@@ -49,5 +50,35 @@ body {
   display: block;
   transform: translateX(120px);
   margin-bottom: 20px;
-  color: var(--bg--color);
+  color: #010b0c;
+}
+.login-logo {
+  width: 80px;
+  height: 110px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Logo_Hust.png/1200px-Logo_Hust.png');
+  background-repeat: no-repeat;
+  background-size: 60px;
+  position: absolute;
+  left: 60px;
+  top: 5px;
+}
+.content-header-1 {
+  color: #414040;
+  position: absolute;
+  left: 140px;
+  top: 15px;
+  align-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+.content-header-2 {
+  color: #414040;
+  position: absolute;
+  left: 140px;
+  top: 10px;
+  align-content: center;
+  padding-top: 45px;
+  font-size: 20px;
+  font-family: sans-serif;
 }
