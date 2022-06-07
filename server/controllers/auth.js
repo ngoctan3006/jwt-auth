@@ -39,14 +39,17 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { username, password: pw, comfirmPassword, ...rest } = req.body;
+  const { username, email, password: pw, comfirmPassword, ...rest } = req.body;
 
   try {
-    const existingUser = await findOne(USER, { username });
-    if (existingUser) {
+    const checkUsername = await findOne(USER, { username });
+    if (checkUsername) {
       return res.status(400).json({ message: 'Tài khoản đã tồn tại.' });
     }
-
+    const checkEmail = await findOne(USER, { email });
+    if (checkEmail) {
+      return res.status(400).json({ message: 'Email đã tồn tại.' });
+    }
     if (pw !== comfirmPassword) {
       return res.status(400).json({ message: 'Mật khẩu không khớp.' });
     }
@@ -56,6 +59,7 @@ export const signup = async (req, res) => {
     const result = await create(USER, {
       id,
       username,
+      email,
       password: hasedPassword,
       ...rest,
     });

@@ -1,32 +1,42 @@
-function signup(e) {
+const API = axios.create({
+  baseURL: 'http://localhost:5000/api/v1',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+const signup = async (e) => {
   e.preventDefault();
   const username = document.querySelector('input[name="username"]').value;
   const email = document.querySelector('input[name="email"]').value;
   const password = document.querySelector('input[name="password"]').value;
-  const cfpassword = document.querySelector('input[name="cfpassword"]').value;
-  const user = {
-    username,
-    email,
-    password,
-    cfpassword,
-  };
-  const json = JSON.stringify(user);
-  localStorage.setItem(username, json);
-  alert('Đăng ký thành công');
-}
+  const comfirmPassword = document.querySelector('input[name="cfpassword"]').value;
+  if (password !== comfirmPassword) {
+    alert('Mật khẩu không khớp');
+    return;
+  }
 
-function login(e) {
+  const user = { email, username, password, comfirmPassword };
+  try {
+    const res = await API.post('/users/signup', user);
+    localStorage.setItem(STORAGE_TOKEN_KEY, res.data.token);
+    alert('Đăng ký thành công.');
+  } catch (error) {
+    alert(error?.response?.data?.message || 'Đăng ký thất bại.');
+  }
+};
+
+const login = async (e) => {
   e.preventDefault();
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
-  const user = localStorage.getItem(username);
-  const data = JSON.parse(user);
-  if (!user) {
-    alert('Vui lòng nhập thông tin');
-  } else if (username == data.username && password == data.password) {
-    alert('Đăng nhập thành công');
-    window.location.href = '';
-  } else {
-    alert('Thông tin chưa chính xác');
+
+  const user = { username, password };
+  try {
+    const res = await API.post('/users/signin', user);
+    localStorage.setItem(STORAGE_TOKEN_KEY, res.data.token);
+    alert('Đăng nhập thành công.');
+  } catch (error) {
+    alert(error?.response?.data?.message || 'Đăng nhập thất bại.');
   }
-}
+};
