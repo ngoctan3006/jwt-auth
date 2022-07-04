@@ -1,10 +1,3 @@
-const API = axios.create({
-  baseURL: 'http://localhost:5000/api/v1',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
 const signup = async (e) => {
   e.preventDefault();
   const username = document.querySelector('input[name="username"]').value;
@@ -30,12 +23,18 @@ const login = async (e) => {
   e.preventDefault();
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
+  const role = document.querySelector('input[name="role"]:checked').value;
 
-  const user = { username, password };
+  const user = { username, password, role };
   try {
     const res = await API.post('/users/signin', user);
     localStorage.setItem(STORAGE_TOKEN_KEY, res.data.token);
-    alert('Đăng nhập thành công.');
+    localStorage.setItem(USER, JSON.stringify(res.data.user));
+    if (res.data.user.role === 1) {
+      window.location.href = './index-lecturer.html';
+    } else if (res.data.user.role === 0) {
+      window.location.href = './index-student.html';
+    }
   } catch (error) {
     alert(error?.response?.data?.message || 'Đăng nhập thất bại.');
   }
