@@ -1,6 +1,6 @@
 -- Database: `qldt_data`
 
-CREATE DATABASE `qldt_data`;
+create database `qldt_data`;
 
 -- --------------------------------------------------------
 
@@ -178,18 +178,17 @@ INSERT INTO `qldt_data`.`subject` (`subject_name`, `subject_id`, `ma_khoa`, `So_
 -- Table structure for table `user`
 --
 
-CREATE TABLE `qldt_data`.`user` (
-  `id` varchar(36) NOT NULL UNIQUE,
-  `email` varchar(255) NOT NULL UNIQUE,
-  `username` varchar(255) NOT NULL UNIQUE,
+create table `qldt_data`.`user` (
+  `id` varchar(36) not null unique,
+  `username` varchar(255) not null unique,
   `fullname` varchar(255),
   `birthday` date,
   `ma_khoa` varchar(5),
   `address` varchar(255),
   `phone` varchar(20),
-  `password` varchar(255) NOT NULL,
-  `level` int,
-  `time` datetime NOT NULL DEFAULT current_timestamp()
+  `password` varchar(255) not null,
+  `role` int not null,
+  `created_at` datetime not null default current_timestamp()
 );
 
 --
