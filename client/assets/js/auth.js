@@ -1,9 +1,8 @@
 const signup = async (e) => {
   e.preventDefault();
-  const username = document.querySelector('input[name="username"]').value;
-  const email = document.querySelector('input[name="email"]').value;
-  const password = document.querySelector('input[name="password"]').value;
-  const comfirmPassword = document.querySelector('input[name="cfpassword"]').value;
+  const username = $('input[name="username"]').val();
+  const password = $('input[name="password"]').val();
+  const comfirmPassword = $('input[name="comfirmPassword"]').val();
   if (password !== comfirmPassword) {
     alert('Mật khẩu không khớp');
     return;
@@ -21,15 +20,14 @@ const signup = async (e) => {
 
 const login = async (e) => {
   e.preventDefault();
-  const username = document.querySelector('input[name="username"]').value;
-  const password = document.querySelector('input[name="password"]').value;
-  const role = document.querySelector('input[name="role"]:checked').value;
+  const username = $('input[name="username"]').val();
+  const password = $('input[name="password"]').val();
+  const role = $('input[name="role"]:checked').val();
 
   const user = { username, password, role };
   try {
     const res = await API.post('/users/signin', user);
     localStorage.setItem(STORAGE_TOKEN_KEY, res.data.token);
-    localStorage.setItem(USER, JSON.stringify(res.data.user));
     if (res.data.user.role === 1) {
       window.location.href = './index-lecturer.html';
     } else if (res.data.user.role === 0) {
