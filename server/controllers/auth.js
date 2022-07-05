@@ -3,9 +3,20 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { USER } from '../constants';
-import { create, findOne } from '../utils/db_querry';
+import { create, findOne, update } from '../utils/db_querry';
 
 dotenv.config();
+
+export const getMe = async (req, res) => {
+  const { userId } = req;
+  try {
+    const user = await findOne(USER, { id: userId });
+    delete user.password;
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export const signin = async (req, res) => {
   const { username, role, password: pw } = req.body;
@@ -72,6 +83,33 @@ export const signup = async (req, res) => {
     );
     const { password, ...user } = result;
     res.status(201).json({ user, token });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  const { oldPassWord, password, comfirmPassword } = req.body;
+  const id = req.userId;
+
+  try {
+    const user = await findOne(USER, { id });
+    if (!user) {
+      return res.status(400).json({ message: 'Không tìm thấy tài khoản.' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(oldPassWord, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: 'Sai mật khẩu.' });
+    }
+
+    if (password !== comfirmPassword) {
+      return res.status(400).json({ message: 'Mật khẩu không khớp.' });
+    }
+
+    const hasedPassword = await bcrypt.hash(password, 12);
+    const result = await update(USER, { id }, { password: hasedPassword });
+    res.json({ message: 'Đổi mật khẩu thành công.' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

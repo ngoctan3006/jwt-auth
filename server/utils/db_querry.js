@@ -59,3 +59,24 @@ export const create = (name, data) => {
     );
   });
 };
+
+export const update = (name, condition, data) => {
+  const { queryCondition, values } = makeQueryCondition(condition);
+  const keys = Object.keys(data);
+
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `UPDATE ${DB_NAME}.${name} SET ${keys
+        .map((key) => `${key} = ?`)
+        .join(', ')} WHERE ${queryCondition}`,
+      [...values, ...Object.values(data)],
+      (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(data);
+        }
+      }
+    );
+  });
+};
