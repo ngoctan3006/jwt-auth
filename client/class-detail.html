@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Quản lý đào tạo</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="./assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="./assets/css/theme.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Nguyễn Văn Nam</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Quản lý tài khoản</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="lecturer-info.html">Thông tin cá nhân</a>
+            <a class="collapse-item" href="login.html">Đăng xuất</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-building"></i>
+          <span>Quản lý lớp học</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="classlist-lecturer.html">Danh sách lớp học</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search -->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+            <div class="topbar-divider d-none d-sm-block"></div>
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                  <h3>103175 - KỸ THUẬT LẬP TRÌNH</h3>
+                  <hr>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-block btn-success" data-toggle="modal" data-target="#addStudentModal"><i class="fa fa-plus"></i> Thêm sinh viên</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#importMarkModal"><i class="fa fa-file-import"></i> Nhập điểm</button>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-block btn-warning"><i class="fa fa-file-excel"></i> Xuất Excel</button>
+                </div>
+                <div class="col-md-12" style="margin-top: 40px;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th width="5%">STT</th>
+                                <th width="20%">Họ tên sinh viên</th>
+                                <th width="10%">Mã sinh viên</th>
+                                <th width="10%">Điểm giữa kỳ</th>
+                                <th width="10%">Điểm cuối kỳ</th>
+                                <th width="10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="student01">
+                                <td>1</td>
+                                <td>Nguyễn Văn C</td>
+                                <td>20211140</td>
+                                <td>7.5</td>
+                                <td>8.0</td>
+                                <td>
+                                    <button class="btn btn-warning" data-toggle="modal" data-target="#editStudentModal" ><i class="fa fa-fw fa-edit"></i></button>
+                                    <button class="btn btn-danger" onclick="deleteStudent(this)"><i class="fa fa-fw fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr id="student01">
+                              <td>2</td>
+                              <td>Nguyễn Văn C</td>
+                              <td>20211140</td>
+                              <td>7.5</td>
+                              <td>8.0</td>
+                              <td>
+                                  <button class="btn btn-warning" data-toggle="modal" data-target="#editStudentModal" ><i class="fa fa-fw fa-edit"></i></button>
+                                  <button class="btn btn-danger" onclick="deleteStudent(this)"><i class="fa fa-fw fa-trash"></i></button>
+                              </td>
+                          </tr>
+                          <tr id="student01">
+                            <td>3</td>
+                            <td>Nguyễn Văn C</td>
+                            <td>20211140</td>
+                            <td>7.5</td>
+                            <td>8.0</td>
+                            <td>
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#editStudentModal" ><i class="fa fa-fw fa-edit"></i></button>
+                                <button class="btn btn-danger" onclick="deleteStudent(this)"><i class="fa fa-fw fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+        <!-- Add student modal -->
+        <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Thêm sinh viên vào lớp học</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addStudentForm">
+                            <div class="form-group">
+                                <label for="student-id">Mã sinh viên</label>
+                                <input type="text" class="form-control" id="student-id" style="width: 50%;">
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-md-3">
+                                <button class="btn btn-block btn-primary" data-dismiss="modal">Thêm</button>
+                              </div>
+                            </div>
+                            <div class="mb-lg-5"></div>
+                            <div class="mb-4" style="font-weight: bolder">Danh sách sinh viên chờ phê duyệt vào lớp</div>
+                            <div>
+                              <table class="table table-striped">
+                                <tbody>
+                                  <tr>
+                                      <td width="10%">20211234</td>
+                                      <td width="25%">Trần Văn Nam</td>
+                                      <td width="10%">
+                                          <button class="btn btn-success"><i class="fa fa-fw fa-check"></i></button>
+                                          <button class="btn btn-danger"><i class="fa fa-fw fa-xmark"></i></button>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="10%">20211234</td>
+                                    <td width="25%">Trần Văn Nam</td>
+                                    <td width="10%">
+                                        <button class="btn btn-success"><i class="fa fa-fw fa-check"></i></button>
+                                        <button class="btn btn-danger"><i class="fa fa-fw fa-xmark"></i></button>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="10%">20211234</td>
+                                    <td width="25%">Trần Văn Nam</td>
+                                    <td width="10%">
+                                        <button class="btn btn-success"><i class="fa fa-fw fa-check"></i></button>
+                                        <button class="btn btn-danger"><i class="fa fa-fw fa-xmark"></i></button>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit student modal -->
+        <div class="modal fade" id="editStudentModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Thay đổi điểm sinh viên</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editStudentForm">
+                            <div class="form-group">
+                                <label>Mã sinh viên</label>
+                                <input type="text" class="form-control" style="width: 100%;" value="20211140" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Họ tên sinh viên</label>
+                                <input type="text" class="form-control" style="width: 100%;" value="Nguyễn Văn C" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Điểm giữa kỳ</label>
+                                <input type="text" class="form-control" id="mark1" style="width: 100%;" value="7.5">
+                            </div>
+                            <div class="form-group">
+                              <label>Điểm cuối kỳ</label>
+                              <input type="text" class="form-control" id="mark2" style="width: 100%;" value="8.0">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
+                        <button class="btn btn-primary" data-dismiss="modal">Cập nhật</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Input mark -->
+        <div class="modal fade" id="importMarkModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">Nhập điểm sinh viên</h5>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <form id="inputMarkForm">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th width="10%">STT</th>
+                              <th width="25%">Họ tên</th>
+                              <th width="10%">Mã sinh viên</td>
+                              <th width="10%">Điểm GK</th>
+                              <th width="10%">Điểm CK</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Nguyễn Văn C</td>
+                                <td>20211140</td>
+                                <td>
+                                  <input type="text" class="form-control" id="mark1" style="width: 100%;" value="">    
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" id="mark2" style="width: 100%;" value="">    
+                                </td>
+                            </tr>
+                            <tr>
+                              <td>2</td>
+                              <td>Nguyễn Văn C</td>
+                              <td>20211140</td>
+                              <td>
+                                <input type="text" class="form-control" id="mark1" style="width: 100%;" value="">    
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" id="mark2" style="width: 100%;" value="">    
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>3</td>
+                              <td>Nguyễn Văn C</td>
+                              <td>20211140</td>
+                              <td>
+                                <input type="text" class="form-control" id="mark1" style="width: 100%;" value="">    
+                              </td>
+                              <td>
+                                <input type="text" class="form-control" id="mark2" style="width: 100%;" value="">    
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
+                      <button class="btn btn-primary" data-dismiss="modal">Nhập</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        function deleteStudent(obj) {
+            var cf = confirm("Bạn muốn xóa sinh viên này ra khỏi lớp?");
+            if (!cf) return;
+        }
+      </script>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; QLDT 2022</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="./assets/vendor/jquery/jquery.min.js"></script>
+  <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="./assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="./assets/js/my_script.js"></script>
+
+</body>
+
+</html>
