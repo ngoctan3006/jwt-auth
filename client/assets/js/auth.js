@@ -26,11 +26,12 @@ const login = async (e) => {
 
   const user = { username, password, role };
   try {
-    const res = await API.post('/users/signin', user);
-    localStorage.setItem(STORAGE_TOKEN_KEY, res.data.token);
-    if (res.data.user.role === 1) {
+    const { data } = await API.post('/users/signin', user);
+    localStorage.setItem(STORAGE_TOKEN_KEY, data.token);
+
+    if (data.user.role === 1) {
       window.location.href = './index-lecturer.html';
-    } else if (res.data.user.role === 0) {
+    } else if (data.user.role === 0) {
       window.location.href = './index-student.html';
     }
   } catch (error) {
