@@ -93,7 +93,6 @@ export const signup = async (req, res) => {
 
 export const changePassword = async (req, res) => {
   const { oldPassword, password, confirmPassword } = req.body;
-  console.log(req.body);
   const id = req.userId;
 
   try {
