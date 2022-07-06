@@ -92,7 +92,8 @@ export const signup = async (req, res) => {
 };
 
 export const changePassword = async (req, res) => {
-  const { oldPassWord, password, comfirmPassword } = req.body;
+  const { oldPassword, password, confirmPassword } = req.body;
+  console.log(req.body);
   const id = req.userId;
 
   try {
@@ -101,12 +102,12 @@ export const changePassword = async (req, res) => {
       return res.status(400).json({ message: 'Không tìm thấy tài khoản.' });
     }
 
-    const isPasswordValid = await bcrypt.compare(oldPassWord, user.password);
+    const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Sai mật khẩu.' });
     }
 
-    if (password !== comfirmPassword) {
+    if (password !== confirmPassword) {
       return res.status(400).json({ message: 'Mật khẩu không khớp.' });
     }
 

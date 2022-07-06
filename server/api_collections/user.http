@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:5000/api/v1
+
+# @name signup
+POST {{baseUrl}}/users/signup
+Content-Type: application/json
+
+{
+  "username": "tan01",
+  "password": "123456",
+  "comfirmPassword": "123456",
+  "fullName": "Nguyễn Ngọc Tân",
+  "role": 1
+}
+
+###
+
+# @name signin
+POST {{baseUrl}}/users/signin
+Content-Type: application/json
+
+{
+  "username": "tan02",
+  "password": "123456",
+  "role": 1
+}
+
+###
+
+# @name getMe
+GET {{baseUrl}}/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhbjAyIiwiaWQiOiI5YjZiZTMwNy1iNGEwLTQ5Y2ItOGFlNC00ZjQ0Yjk3ODFmNzMiLCJyb2xlIjoxLCJpYXQiOjE2NTcwMTAxMjAsImV4cCI6MTY1NzAxMzcyMH0.qbwPk3BGoJrw_aQSHPYrAIIsMX8rrC_3TyIhvMrHRFM
+
+###
+
+# @name changePassword
+PUT {{baseUrl}}/users/change-password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhbjAyIiwiaWQiOiI5YjZiZTMwNy1iNGEwLTQ5Y2ItOGFlNC00ZjQ0Yjk3ODFmNzMiLCJyb2xlIjoxLCJpYXQiOjE2NTcxNDIyNTgsImV4cCI6MTY1NzE0NTg1OH0.lqmq4QKPhknHbDHnzQ2cZWNg-258B47DRaTHkOdxaM8
+
+{
+  "oldPassword": "123",
+  "password": "123456",
+  "confirmPassword": "123456"
+}
