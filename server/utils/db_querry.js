@@ -69,7 +69,7 @@ export const update = (name, condition, data) => {
       `UPDATE ${DB_NAME}.${name} SET ${keys
         .map((key) => `${key} = ?`)
         .join(', ')} WHERE ${queryCondition}`,
-      [...values, ...Object.values(data)],
+      [...Object.values(data), ...values],
       (error) => {
         if (error) {
           reject(error);

@@ -14,6 +14,7 @@ export const getMe = async (req, res) => {
     delete user.password;
     res.status(200).json(user);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -46,6 +47,7 @@ export const signin = async (req, res) => {
 
     res.json({ user, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -84,6 +86,7 @@ export const signup = async (req, res) => {
     const { password, ...user } = result;
     res.status(201).json({ user, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -108,9 +111,10 @@ export const changePassword = async (req, res) => {
     }
 
     const hasedPassword = await bcrypt.hash(password, 12);
-    const result = await update(USER, { id }, { password: hasedPassword });
+    await update(USER, { id }, { password: hasedPassword });
     res.json({ message: 'Đổi mật khẩu thành công.' });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };
