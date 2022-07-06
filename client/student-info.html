@@ -35,12 +35,12 @@
         <!-- Sidebar - Brand -->
         <a
           class="sidebar-brand d-flex align-items-center justify-content-center"
-          href="./index-lecturer.html"
+          href="./index-student.html"
         >
           <div class="sidebar-brand-icon">
             <i class="fas fa-user"></i>
           </div>
-          <div id="sidebar-fullname" class="sidebar-brand-text mx-3"></div>
+          <div id="student-name" class="sidebar-brand-text mx-3"></div>
         </a>
 
         <!-- Divider -->
@@ -65,8 +65,8 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="./lecturer-info.html">Thông tin cá nhân</a>
-              <a class="collapse-item" href="JavaScript:void(0);" onclick="logout()">Đăng xuất</a>
+              <a class="collapse-item" href="student-info.html">Thông tin cá nhân</a>
+              <a class="collapse-item" onclick="logout()" href="JavaScript:void(0);">Đăng xuất</a>
             </div>
           </div>
         </li>
@@ -89,7 +89,7 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="./classlist-lecturer.html">Danh sách lớp học</a>
+              <a class="collapse-item" href="classlist-student.html">Danh sách lớp học</a>
             </div>
           </div>
         </li>
@@ -182,17 +182,27 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12 mb-4">
-                <h3 style="font-weight: bolder">Thông tin cá nhân - Giảng viên</h3>
+                <h3 style="font-weight: bolder">Thông tin cá nhân - Sinh viên</h3>
                 <hr />
               </div>
               <div class="col-md-8">
-                <form id="lecture-info">
+                <form id="addStudentForm">
                   <div class="form-group">
                     <label>Tên đăng nhập</label>
                     <input
                       type="text"
                       class="form-control mb-4"
                       id="username"
+                      style="width: 50%"
+                      disabled
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Mã sinh viên</label>
+                    <input
+                      type="text"
+                      class="form-control mb-4"
+                      id="student-id"
                       style="width: 50%"
                       disabled
                     />
@@ -240,7 +250,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form id="change-password" onsubmit="changePassword(event)">
+                    <form id="changePassModal" onsubmit="changePassword(event)">
                       <div class="form-group">
                         <label>Nhập mật khẩu cũ</label>
                         <input type="password" class="form-control" id="old-pass" />
@@ -310,7 +320,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="JavaScript:void(0);" onclick="logout()">Logout</a>
+            <a href="JavaScript:void(0);" class="btn btn-primary">Logout</a>
           </div>
         </div>
       </div>
@@ -327,10 +337,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Custom scripts for all pages-->
+    <script src="./assets/js/my_script.js"></script>
+
+    <!-- API -->
     <script src="./assets/js/constants.js"></script>
     <script src="./assets/js/api.js"></script>
-    <script src="./assets/js/my_script.js"></script>
-    <script src="./assets/js/lecture/info.js"></script>
-    <script src="./assets/js/user/change-password.js"></script>
+    <script src="./assets/js/student/info.js"></script>
   </body>
 </html>
