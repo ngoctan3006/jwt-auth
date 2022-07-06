@@ -1,4 +1,8 @@
 (async () => {
+  if (!localStorage.getItem(STORAGE_TOKEN_KEY)) {
+    window.location.href = './login.html';
+  }
+
   try {
     const { data: curr_user } = await API.get('/users/me');
     $('#lecture-name').text(curr_user.fullname);
