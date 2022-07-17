@@ -1,6 +1,6 @@
-import { CLASS, CS, SUBJECT, TEACHER } from '../constants';
-import { create, find, findNameSubject, findOne, update } from '../utils/db_querry';
 import { v4 as uuidv4 } from 'uuid';
+import { CLASS, TEACHER } from '../constants';
+import { create, deleteRow, find, findOne, update } from '../utils/db_querry';
 
 export const getClasses = async (req, res) => {
   const { id, role } = req.user;
@@ -34,10 +34,10 @@ export const getClass = async (req, res) => {
 };
 
 export const createClass = async (req, res) => {
-  const { classCode, subjectCode, subjectName, semester, room } = req.body;
+  const { classCode, subjectName, semester, room } = req.body;
   const { id: userId, role } = req.user;
 
-  if (!classCode || !subjectCode || !subjectName || !semester || !room) {
+  if (!classCode || !subjectName || !semester || !room) {
     return res.status(400).json({ message: 'Không được bỏ trống các trường.' });
   }
 
@@ -97,6 +97,26 @@ export const updateClass = async (req, res) => {
     );
 
     await res.json({ message: 'Cập nhật lớp thành công.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const deleteClass = async (req, res) => {
+  const { id: userId, role } = req.user;
+  const { id } = req.params;
+
+  try {
+    const user = await findOne(TEACHER, { userId });
+
+    if (!user || role !== 1) {
+      return res.status(403).json({ message: 'Không có quyền.' });
+    }
+
+    await deleteRow(CLASS, { id });
+
+    await res.json({ message: 'Xóa lớp thành công.' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });

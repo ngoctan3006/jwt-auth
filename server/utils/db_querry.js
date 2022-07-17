@@ -112,3 +112,21 @@ export const findNameSubject = (classCode) => {
     );
   });
 };
+
+export const deleteRow = (name, condition) => {
+  const { queryCondition, values } = makeQueryCondition(condition);
+
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `DELETE FROM ${DB_NAME}.${name} WHERE ${queryCondition}`,
+      [...values],
+      (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      }
+    );
+  });
+};
