@@ -12,7 +12,7 @@ export const getMe = async (req, res) => {
   try {
     const user = await findOne(USER, { id: userId });
     delete user.password;
-    res.status(200).json(user);
+    res.json(user);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
@@ -53,7 +53,7 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { username, role, password: pw, comfirmPassword, ...rest } = req.body;
+  const { username, role, password: pw, comfirmPassword } = req.body;
 
   try {
     const checkUsername = await findOne(USER, { username });
@@ -71,7 +71,6 @@ export const signup = async (req, res) => {
       username,
       password: hasedPassword,
       role,
-      ...rest,
     });
 
     const token = jwt.sign(

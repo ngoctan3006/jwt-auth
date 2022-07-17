@@ -8,8 +8,7 @@ Content-Type: application/json
   "username": "tan01",
   "password": "123456",
   "comfirmPassword": "123456",
-  "fullName": "Nguyễn Ngọc Tân",
-  "role": 1
+  "role": 2
 }
 
 ###
@@ -19,9 +18,9 @@ POST {{baseUrl}}/users/signin
 Content-Type: application/json
 
 {
-  "username": "tan02",
+  "username": "linh.nt200001",
   "password": "123456",
-  "role": 1
+  "role": 0
 }
 
 ###
