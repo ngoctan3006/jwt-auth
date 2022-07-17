@@ -96,3 +96,19 @@ export const update = (name, condition, data) => {
     );
   });
 };
+
+export const findNameSubject = (classCode) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT subject.name FROM ${DB_NAME}.class_subject, ${DB_NAME}.subject WHERE class_subject.classCode = ? AND class_subject.subjectCode = subject.code`,
+      [classCode],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      }
+    );
+  });
+};

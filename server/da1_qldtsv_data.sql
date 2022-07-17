@@ -35,7 +35,6 @@ CREATE TABLE `qldt`.`subject` (
 -- Table structure for table `class`
 CREATE TABLE `qldt`.`class` (
   `code` varchar(25) UNIQUE PRIMARY KEY NOT NULL,
-  `name` varchar(255),
   `room` varchar(20) NOT NULL,
   `semester` varchar(10) NOT NULL,
   `teacherCode` varchar(36),
@@ -52,6 +51,9 @@ CREATE TABLE `qldt`.`class_subject` (
 CREATE TABLE `qldt`.`class_student` (
   `classCode` varchar(25) NOT NULL,
   `studentCode` varchar(10) NOT NULL,
+  `midterm` double,
+  `final` double,
+  `status` int DEFAULT 0,
   FOREIGN KEY (`classCode`) REFERENCES `qldt`.`class` (`code`) ON DELETE CASCADE,
   FOREIGN KEY (`studentCode`) REFERENCES `qldt`.`student` (`code`) ON DELETE CASCADE
 );

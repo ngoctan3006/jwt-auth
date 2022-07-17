@@ -1,17 +1,21 @@
 @baseUrl = http://localhost:5000/api/v1
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiYzBiZDFmYjItOGFiMS00OTVjLTk2NDgtYzEzY2JlZGY3YTJhIiwicm9sZSI6MSwiaWF0IjoxNjU4MDg1NjY0LCJleHAiOjE2NTgwODkyNjR9.RDVkPA4PNlbwtE-w_bPKAPonFpE4-SoJ414jraLaFjk
 
-# @name getMe
-GET {{baseUrl}}/teachers/me
+# @name getClass
+GET {{baseUrl}}/class
 Authorization: Bearer {{token}}
 
 ###
 
-# @name createTeacher
-POST {{baseUrl}}/teachers
+# @name createClass
+POST {{baseUrl}}/class
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "fullname": "Trần Văn Dũng",
-  "code": "et001"
+  "classCode": "103176",
+  "subjectCode": "ET2031",
+  "subjectName": "Kỹ thuật lập trình",
+  "semester": "20222",
+  "room": "D3-201"
 }
