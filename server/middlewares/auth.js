@@ -11,7 +11,7 @@ const auth = (req, res, next) => {
       const decodedData = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decodedData;
     } else {
-      throw new Error('No token provided');
+      res.status(401).json({ message: 'Token không tồn tại.' });
     }
     next();
   } catch (error) {
