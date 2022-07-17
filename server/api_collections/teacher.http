@@ -1,0 +1,10 @@
+@baseUrl = http://localhost:5000/api/v1
+
+# @name createTeacher
+POST {{baseUrl}}/teachers
+Content-Type: application/json
+
+{
+  "fullname": "Trần Văn Dũng",
+  "code": "et001"
+}
