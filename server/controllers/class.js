@@ -1,7 +1,7 @@
 import { CLASS, CS, SUBJECT, TEACHER } from '../constants';
 import { create, find, findNameSubject, findOne } from '../utils/db_querry';
 
-export const getClass = async (req, res) => {
+export const getClasses = async (req, res) => {
   const { id, role } = req.user;
   try {
     const user = await findOne(TEACHER, { userId: id });
@@ -20,6 +20,25 @@ export const getClass = async (req, res) => {
     }
 
     res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getClass = async (req, res) => {
+  const { id, role } = req.user;
+  const { code } = req.params;
+  try {
+    const user = await findOne(TEACHER, { userId: id });
+    if (!user || role !== 1) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const result = await findOne(CLASS, { teacherCode: user.code, code });
+    const subjectName = (await findNameSubject(result.code))[0].name;
+
+    res.json({ ...result, subjectName });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
