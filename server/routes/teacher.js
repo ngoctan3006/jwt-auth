@@ -1,8 +1,10 @@
 import express from 'express';
-import { createTeacher } from '../controllers/teacher';
+import { createTeacher, getMe } from '../controllers/teacher';
+import auth from '../middlewares/auth';
 
 const router = express.Router();
 
+router.get('/me', auth, getMe);
 router.post('/', createTeacher);
 
 export default router;

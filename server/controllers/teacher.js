@@ -2,17 +2,21 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
 import { TEACHER, USER } from '../constants';
-import { create } from '../utils/db_querry';
+import { create, findOne } from '../utils/db_querry';
 import { generateUsername } from '../utils/user';
 
 dotenv.config();
 
 export const getMe = async (req, res) => {
-  const { userId } = req;
+  const { user } = req;
+
   try {
-    const user = await findOne(USER, { id: userId });
-    delete user.password;
-    res.json(user);
+    const result = await findOne(TEACHER, { userId: user.id });
+
+    if (result) {
+      return res.json({ ...result });
+    }
+    res.status(404).json({ message: 'Không tìm thấy thông tin.' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
