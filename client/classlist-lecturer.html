@@ -33,11 +33,14 @@
         id="accordionSidebar"
       >
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a
+          class="sidebar-brand d-flex align-items-center justify-content-center"
+          href="./index-lecturer.html"
+        >
           <div class="sidebar-brand-icon">
             <i class="fas fa-user"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">Nguyễn Văn Nam</div>
+          <div id="lecture-name" class="sidebar-brand-text mx-3"></div>
         </a>
 
         <!-- Divider -->
@@ -62,8 +65,8 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="lecturer-info.html">Thông tin cá nhân</a>
-              <a class="collapse-item" href="login.html">Đăng xuất</a>
+              <a class="collapse-item" href="./lecturer-info.html">Thông tin cá nhân</a>
+              <a class="collapse-item" href="./login.html">Đăng xuất</a>
             </div>
           </div>
         </li>
@@ -86,7 +89,7 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="classlist-lecturer.html">Danh sách lớp học</a>
+              <a class="collapse-item" href="./classlist-lecturer.html">Danh sách lớp học</a>
             </div>
           </div>
         </li>
@@ -189,7 +192,8 @@
                 </button>
               </div>
               <div class="col-md-12" style="margin-top: 40px">
-                <table class="table table-striped">
+                <div id="no-data" class="text-center">Không có dữ liệu</div>
+                <table id="class-list" class="table table-striped">
                   <thead>
                     <tr>
                       <th width="5%">Mã lớp</th>
@@ -199,80 +203,7 @@
                       <th width="10%"></th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr id="class01">
-                      <td><a href="class-detail.html">103175</a></td>
-                      <td>Kỹ thuật lập trình</td>
-                      <td>20222</td>
-                      <td>D3-201</td>
-                      <td>
-                        <button
-                          class="btn btn-warning"
-                          data-toggle="modal"
-                          data-target="#editClassModal"
-                        >
-                          <i class="fa fa-fw fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger" onclick="deleteClass(this)">
-                          <i class="fa fa-fw fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr id="class02">
-                      <td><a href="class-detail.html">103175</a></td>
-                      <td>Kỹ thuật lập trình</td>
-                      <td>20222</td>
-                      <td>D3-201</td>
-                      <td>
-                        <button
-                          class="btn btn-warning"
-                          data-toggle="modal"
-                          data-target="#editClassModal"
-                        >
-                          <i class="fa fa-fw fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger" onclick="deleteClass(this)">
-                          <i class="fa fa-fw fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr id="class03">
-                      <td><a href="class-detail.html">103175</a></td>
-                      <td>Kỹ thuật lập trình</td>
-                      <td>20222</td>
-                      <td>D3-201</td>
-                      <td>
-                        <button
-                          class="btn btn-warning"
-                          data-toggle="modal"
-                          data-target="#editClassModal"
-                        >
-                          <i class="fa fa-fw fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger" onclick="deleteClass(this)">
-                          <i class="fa fa-fw fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr id="class04">
-                      <td><a href="class-detail.html">103175</a></td>
-                      <td>Kỹ thuật lập trình</td>
-                      <td>20222</td>
-                      <td>D3-201</td>
-                      <td>
-                        <button
-                          class="btn btn-warning"
-                          data-toggle="modal"
-                          data-target="#editClassModal"
-                        >
-                          <i class="fa fa-fw fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger" onclick="deleteClass(this)">
-                          <i class="fa fa-fw fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
+                  <tbody id="class-list-body"></tbody>
                 </table>
               </div>
             </div>
@@ -300,21 +231,30 @@
                 <div class="modal-body">
                   <form id="addClassForm">
                     <div class="form-group">
-                      <label for="class-id">Mã lớp học</label>
-                      <input type="text" class="form-control" id="class-id" style="width: 100%" />
+                      <label for="class-code">Mã lớp học</label>
+                      <input type="text" id="class-code" class="form-control" style="width: 100%" />
                     </div>
                     <div class="form-group">
-                      <label for="class-title">Tên môn học</label>
+                      <label for="subject-code">Mã môn học</label>
                       <input
                         type="text"
                         class="form-control"
-                        id="class-title"
+                        id="subject-code"
                         style="width: 100%"
                       />
                     </div>
                     <div class="form-group">
-                      <label for="class-semester">Học kỳ</label>
-                      <select class="form-control" id="class-semester">
+                      <label for="subject-name">Tên môn học</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="subject-name"
+                        style="width: 100%"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="semester">Học kỳ</label>
+                      <select class="form-control" id="semester">
                         <option value="20221">20221</option>
                         <option value="20222">20222</option>
                         <option value="20223">20223</option>
@@ -324,14 +264,14 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="class-room">Phòng học</label>
-                      <input type="text" class="form-control" id="class-room" style="width: 100%" />
+                      <label for="room">Phòng học</label>
+                      <input type="text" class="form-control" id="room" style="width: 100%" />
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                  <button class="btn btn-primary" data-dismiss="modal">Thêm</button>
+                  <button class="btn btn-primary" onclick="addClass()">Thêm</button>
                 </div>
               </div>
             </div>
@@ -358,30 +298,28 @@
                 <div class="modal-body">
                   <form id="editClassForm">
                     <div class="form-group">
-                      <label for="edit-class-id">Mã lớp học</label>
+                      <label for="edit-class-code">Mã lớp học</label>
                       <input
                         type="text"
                         class="form-control"
-                        id="edit-class-id"
+                        id="edit-class-code"
                         style="width: 100%"
-                        value="103175"
                       />
                     </div>
                     <div class="form-group">
-                      <label for="edit-class-title">Tên môn học</label>
+                      <label for="edit-subject-name">Tên môn học</label>
                       <input
                         type="text"
                         class="form-control"
-                        id="edit-class-title"
+                        id="edit-subject-name"
                         style="width: 100%"
-                        value="Kỹ thuật lập trình"
                       />
                     </div>
                     <div class="form-group">
-                      <label for="edit-class-semester">Học kỳ</label>
-                      <select class="form-control" id="edit-class-semester">
+                      <label for="edit-semester">Học kỳ</label>
+                      <select class="form-control" id="edit-semester">
                         <option value="20221">20221</option>
-                        <option value="20222" selected>20222</option>
+                        <option value="20222">20222</option>
                         <option value="20223">20223</option>
                         <option value="20231">20231</option>
                         <option value="20232">20232</option>
@@ -389,20 +327,14 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="edit-class-room">Phòng học</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="edit-class-room"
-                        style="width: 100%"
-                        value="D3-201"
-                      />
+                      <label for="edit-room">Phòng học</label>
+                      <input type="text" class="form-control" id="edit-room" style="width: 100%" />
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                  <button class="btn btn-primary" data-dismiss="modal">Cập nhật</button>
+                  <button class="btn btn-primary" onclick="updateClass(currClass)">Cập nhật</button>
                 </div>
               </div>
             </div>
@@ -470,7 +402,14 @@
     <!-- Core plugin JavaScript-->
     <script src="./assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <!-- Custom scripts for all pages-->
+    <script src="./assets/js/constants.js"></script>
+    <script src="./assets/js/api.js"></script>
     <script src="./assets/js/my_script.js"></script>
+    <script src="./assets/js/lecture/info.js"></script>
+    <script src="./assets/js/lecture/class.js"></script>
   </body>
 </html>
