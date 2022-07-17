@@ -7,18 +7,6 @@ import { create, findOne, update } from '../utils/db_querry';
 
 dotenv.config();
 
-export const getMe = async (req, res) => {
-  const { userId } = req;
-  try {
-    const user = await findOne(USER, { id: userId });
-    delete user.password;
-    res.json(user);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: error.message });
-  }
-};
-
 export const signin = async (req, res) => {
   const { username, role, password: pw } = req.body;
 
@@ -43,9 +31,9 @@ export const signin = async (req, res) => {
       { expiresIn: '1h' }
     );
 
-    const { password, ...user } = existingUser;
+    delete existingUser.password;
 
-    res.json({ user, token });
+    res.json({ user: existingUser, token });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
@@ -82,8 +70,11 @@ export const signup = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
-    const { password, ...user } = result;
-    res.status(201).json({ user, token });
+
+    delete result.password;
+    delete result.role;
+
+    res.status(201).json({ user: result, token });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
@@ -92,7 +83,7 @@ export const signup = async (req, res) => {
 
 export const changePassword = async (req, res) => {
   const { oldPassword, password, confirmPassword } = req.body;
-  const id = req.userId;
+  const { id } = req.user;
 
   try {
     const user = await findOne(USER, { id });
@@ -107,6 +98,10 @@ export const changePassword = async (req, res) => {
 
     if (password !== confirmPassword) {
       return res.status(400).json({ message: 'Mật khẩu không khớp.' });
+    }
+
+    if (oldPassword === password) {
+      return res.status(400).json({ message: 'Mật khẩu mới không được trùng với mật khẩu cũ.' });
     }
 
     const hasedPassword = await bcrypt.hash(password, 12);

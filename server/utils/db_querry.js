@@ -41,6 +41,22 @@ export const findOne = (name, condition) => {
   });
 };
 
+export const findInfo = (table, id) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT * FROM ${DB_NAME}.user, ${DB_NAME}.${table} WHERE ${table}.userId = ? AND ${table}.userId = user.id`,
+      [id],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results.length ? results[0] : undefined);
+        }
+      }
+    );
+  });
+};
+
 export const create = (name, data) => {
   const keys = Object.keys(data);
   return new Promise((resolve, reject) => {
