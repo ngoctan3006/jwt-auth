@@ -8,7 +8,6 @@ const changePassword = async (e) => {
     password,
     confirmPassword,
   };
-  console.log(pw_change);
   try {
     await API.put('/users/change-password', pw_change);
     alert('Đổi mật khẩu thành công. Vui lòng đăng nhập lại.');
