@@ -4,7 +4,7 @@
   }
 
   try {
-    const { data: curr_user } = await API.get('/users/me');
+    const { data: curr_user } = await API.get('/teachers/me');
     $('#lecture-name').text(curr_user.fullname);
 
     $('#username').val(curr_user.username);

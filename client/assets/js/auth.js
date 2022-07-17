@@ -1,23 +1,3 @@
-const signup = async (e) => {
-  e.preventDefault();
-  const username = $('input[name="username"]').val();
-  const password = $('input[name="password"]').val();
-  const comfirmPassword = $('input[name="comfirmPassword"]').val();
-  if (password !== comfirmPassword) {
-    alert('Mật khẩu không khớp');
-    return;
-  }
-
-  const user = { email, username, password, comfirmPassword };
-  try {
-    const res = await API.post('/users/signup', user);
-    localStorage.setItem(STORAGE_TOKEN_KEY, res.data.token);
-    alert('Đăng ký thành công.');
-  } catch (error) {
-    alert(error?.response?.data?.message || 'Đăng ký thất bại.');
-  }
-};
-
 const login = async (e) => {
   e.preventDefault();
   const username = $('input[name="username"]').val();

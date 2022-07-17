@@ -4,9 +4,9 @@
   }
 
   try {
-    const { data: curr_user } = await API.get('/users/me');
+    const { data: curr_user } = await API.get('/students/me');
     $('#student-name').text(curr_user.fullname);
-
+    $('#student-id').val(curr_user.code);
     $('#username').val(curr_user.username);
     $('#sidebar-fullname, #fullname').val(curr_user.fullname);
   } catch (error) {
