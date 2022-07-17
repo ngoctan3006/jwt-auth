@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:5000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiYzBiZDFmYjItOGFiMS00OTVjLTk2NDgtYzEzY2JlZGY3YTJhIiwicm9sZSI6MSwiaWF0IjoxNjU4MDkxMTg2LCJleHAiOjE2NTgwOTQ3ODZ9.tRmXchF5rOPt61uFLW6_g_l9I-Cvct4RSlMdS2cVn6Q
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiZTYxMmQ3YzItNjU5ZS00Njk3LWE4ODEtNDgyNWM3ZTNmNTM0Iiwicm9sZSI6MSwiaWF0IjoxNjU4MDk1MjkwLCJleHAiOjE2NTgwOTg4OTB9.44KTu5G6zV5YNtTl6YnUcNzRJFEszJrtHMA10eKi1CI
 
 # @name getClasses
 GET {{baseUrl}}/class
@@ -8,7 +8,7 @@ Authorization: Bearer {{token}}
 ###
 
 # @name getClass
-GET {{baseUrl}}/class/103175
+GET {{baseUrl}}/class/123123
 Authorization: Bearer {{token}}
 
 ###
@@ -24,4 +24,18 @@ Content-Type: application/json
   "subjectName": "Kỹ thuật lập trình",
   "semester": "20222",
   "room": "D3-201"
+}
+
+###
+
+# @name updateClass
+PUT {{baseUrl}}/class/96d01413-97f0-4972-aae7-125bb64e22d9
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "classCode": "123123",
+  "subjectName": "Nhập môn CNTT",
+  "semester": "20221",
+  "room": "D9-401"
 }

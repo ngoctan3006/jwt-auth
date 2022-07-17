@@ -26,26 +26,15 @@ CREATE TABLE `qldt`.`teacher` (
   FOREIGN KEY (`userId`) REFERENCES `qldt`.`user` (`id`) ON DELETE CASCADE
 );
 
--- Table structure for table `subject`
-CREATE TABLE `qldt`.`subject` (
-  `code` varchar(25) UNIQUE PRIMARY KEY NOT NULL,
-  `name` varchar(255) NOT NULL
-);
-
 -- Table structure for table `class`
 CREATE TABLE `qldt`.`class` (
+  `id` varchar(36) UNIQUE NOT NULL,
   `code` varchar(25) UNIQUE PRIMARY KEY NOT NULL,
   `room` varchar(20) NOT NULL,
   `semester` varchar(10) NOT NULL,
-  `teacherCode` varchar(36),
+  `teacherCode` varchar(36) NOT NULL,
+  `subjectName` varchar(255) NOT NULL,
   FOREIGN KEY (`teacherCode`) REFERENCES `qldt`.`teacher` (`code`) ON DELETE CASCADE
-);
-
-CREATE TABLE `qldt`.`class_subject` (
-  `classCode` varchar(25) NOT NULL,
-  `subjectCode` varchar(25) NOT NULL,
-  FOREIGN KEY (`classCode`) REFERENCES `qldt`.`class` (`code`) ON DELETE CASCADE,
-  FOREIGN KEY (`subjectCode`) REFERENCES `qldt`.`subject` (`code`) ON DELETE CASCADE
 );
 
 CREATE TABLE `qldt`.`class_student` (
