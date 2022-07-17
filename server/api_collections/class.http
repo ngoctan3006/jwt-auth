@@ -19,7 +19,7 @@ Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "classCode": "103176",
+  "classCode": "103177",
   "subjectCode": "ET2031",
   "subjectName": "Kỹ thuật lập trình",
   "semester": "20222",
