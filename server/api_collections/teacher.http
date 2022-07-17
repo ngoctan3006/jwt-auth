@@ -10,6 +10,7 @@ Authorization: Bearer {{token}}
 # @name createTeacher
 POST {{baseUrl}}/teachers
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "fullname": "Trần Văn Dũng",

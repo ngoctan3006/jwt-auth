@@ -28,6 +28,11 @@ export const getMe = async (req, res) => {
 
 export const createStudent = async (req, res) => {
   const { fullname, code } = req.body;
+  const { role } = req.user;
+
+  if (role < 2) {
+    return res.status(403).json({ message: 'Bạn không có quyền thực hiện chức năng này.' });
+  }
 
   try {
     const username = generateUsername({ name: fullname, code });
