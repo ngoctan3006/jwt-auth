@@ -246,9 +246,9 @@ export const acceptStudent = async (req, res) => {
 
 export const requestJoinClass = async (req, res) => {
   const { id: userId } = req.user;
-  const { classCode, studentCode } = req.body;
+  const { classCode } = req.body;
 
-  if (!classCode || !studentCode) {
+  if (!classCode) {
     return res.status(400).json({ message: 'Không được bỏ trống các trường.' });
   }
 
@@ -263,6 +263,8 @@ export const requestJoinClass = async (req, res) => {
     if (!classExist) {
       return res.status(400).json({ message: 'Lớp không tồn tại.' });
     }
+
+    const studentCode = user.code;
 
     const isAdded = await findOne(CLASS_STUDENT, { classCode, studentCode });
     if (isAdded) {

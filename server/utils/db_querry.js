@@ -131,11 +131,11 @@ export const deleteRow = (name, condition) => {
   });
 };
 
-export const getStudentList = (classCode) => {
+export const getStudentList = ({ code, status }) => {
   return new Promise((resolve, reject) => {
     connection.query(
-      `SELECT * FROM ${DB_NAME}.class_student, ${DB_NAME}.student WHERE class_student.classCode = ? AND class_student.studentCode = student.code`,
-      [classCode],
+      `SELECT * FROM ${DB_NAME}.class_student, ${DB_NAME}.student WHERE class_student.classCode = ? AND class_student.studentCode = student.code AND class_student.status = ?`,
+      [code, status],
       (error, results) => {
         if (error) {
           reject(error);

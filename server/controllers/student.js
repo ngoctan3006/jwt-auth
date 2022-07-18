@@ -29,6 +29,7 @@ export const getMe = async (req, res) => {
 export const getStudents = async (req, res) => {
   const { id: userId, role } = req.user;
   const { code } = req.params;
+  const { status } = req.query;
 
   try {
     const user = await findOne(TEACHER, { userId });
@@ -37,7 +38,7 @@ export const getStudents = async (req, res) => {
       return res.status(401).json({ message: 'Bạn không có quyền thực hiện chức năng này.' });
     }
 
-    const result = await getStudentList(code);
+    const result = await getStudentList({ code, status });
 
     res.json(result);
   } catch (error) {

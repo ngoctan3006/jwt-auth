@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:5000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRhbjAxIiwiaWQiOiI5ODk1NDM0YS0wMDVlLTQ0N2UtYjU1ZS1jMDUwMzA4NjkxZjgiLCJyb2xlIjoyLCJpYXQiOjE2NTgxMTM5NzQsImV4cCI6MTY1ODExNzU3NH0.fs5-0KoOwAwYzfGLY_yrDSB4pUVQMXPRmqGjuDa1lEo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imh1eS5ueDE5MjI0NCIsImlkIjoiYmZmNGQ3MGQtYmNiNi00MTQyLTliMjctY2FjZjAwN2JkYWI1Iiwicm9sZSI6MCwiaWF0IjoxNjU4MTIxMjA5LCJleHAiOjE2NTgxMjQ4MDl9.elfG0IHntnDaGcUiJfmwhn5rhnktkLoO1dNMbUofHaw
 
 # @name getMe
 GET {{baseUrl}}/students/me
@@ -16,3 +16,15 @@ Authorization: Bearer {{token}}
   "fullname": "Nguyễn Xuân Huy",
   "code": "20192244"
 }
+
+###
+
+# @name requestJoinClass
+POST {{baseUrl}}/class/request-join-class
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "classCode": "103176"
+}
+
