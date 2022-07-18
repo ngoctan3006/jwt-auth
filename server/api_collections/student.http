@@ -27,4 +27,3 @@ Authorization: Bearer {{token}}
 {
   "classCode": "103176"
 }
-

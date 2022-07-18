@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  acceptStudent,
   addStudentToClass,
   createClass,
   deleteClass,
@@ -18,6 +19,7 @@ router.post('/', auth, createClass);
 router.post('/addStudent', auth, addStudentToClass);
 router.delete('/deleteStudent', auth, removeStudentFromClass);
 router.post('/request-join-class', auth, requestJoinClass);
+router.put('/accept-student', auth, acceptStudent);
 router.get('/:code', auth, getClass);
 router.put('/:id', auth, updateClass);
 router.delete('/:id', auth, deleteClass);
