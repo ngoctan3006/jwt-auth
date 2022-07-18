@@ -114,6 +114,11 @@ export const deleteClass = async (req, res) => {
       return res.status(403).json({ message: 'Không có quyền.' });
     }
 
+    const classExist = await findOne(CLASS, { id });
+    if (!classExist) {
+      return res.status(404).json({ message: 'Lớp không tồn tại.' });
+    }
+
     await deleteRow(CLASS, { id });
 
     await res.json({ message: 'Xóa lớp thành công.' });
@@ -161,6 +166,45 @@ export const addStudentToClass = async (req, res) => {
     });
 
     res.json({ message: 'Thêm sinh viên vào lớp thành công.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const removeStudentFromClass = async (req, res) => {
+  const { id: userId, role } = req.user;
+  const { classCode, studentCode } = req.body;
+
+  if (!classCode || !studentCode) {
+    return res.status(400).json({ message: 'Không được bỏ trống các trường.' });
+  }
+
+  try {
+    const user = await findOne(TEACHER, { userId });
+
+    if (!user || role < 1) {
+      return res.status(403).json({ message: 'Không có quyền.' });
+    }
+
+    const classExist = await findOne(CLASS, { code: classCode });
+    if (!classExist) {
+      return res.status(400).json({ message: 'Lớp không tồn tại.' });
+    }
+
+    const studentExist = await findOne(STUDENT, { code: studentCode });
+    if (!studentExist) {
+      return res.status(400).json({ message: 'Sinh viên không tồn tại.' });
+    }
+
+    const isAdded = await findOne(CLASS_STUDENT, { classCode, studentCode });
+    if (!isAdded) {
+      return res.status(400).json({ message: 'Sinh viên không có trong lớp.' });
+    }
+
+    await deleteRow(CLASS_STUDENT, { classCode, studentCode });
+
+    res.json({ message: 'Xóa sinh viên khỏi lớp thành công.' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });

@@ -52,6 +52,8 @@ Content-Type: application/json
   "studentCode": "20210011"
 }
 
+###
+
 # @name deleteStudent
 DELETE {{baseUrl}}/class/deleteStudent
 Authorization: Bearer {{token}}
