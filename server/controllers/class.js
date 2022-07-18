@@ -210,3 +210,74 @@ export const removeStudentFromClass = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const acceptStudent = async (req, res) => {
+  const { id: userId, role } = req.user;
+  const { classCode, studentCode } = req.body;
+
+  if (!classCode || !studentCode) {
+    return res.status(400).json({ message: 'Không được bỏ trống các trường.' });
+  }
+
+  try {
+    const user = await findOne(TEACHER, { userId });
+
+    if (!user || role < 1) {
+      return res.status(403).json({ message: 'Không có quyền.' });
+    }
+
+    const classExist = await findOne(CLASS, { code: classCode });
+    if (!classExist) {
+      return res.status(400).json({ message: 'Lớp không tồn tại.' });
+    }
+
+    const isPending = await findOne(CLASS_STUDENT, { classCode, studentCode });
+    if (!isPending || isPending.status === 1) {
+      return res.status(400).json({ message: 'Không tìm thấy yêu cầu.' });
+    }
+
+    await update(CLASS_STUDENT, { classCode, studentCode }, { status: 1 });
+    res.json({ message: 'Thêm sinh viên vào lớp thành công.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const requestJoinClass = async (req, res) => {
+  const { id: userId } = req.user;
+  const { classCode, studentCode } = req.body;
+
+  if (!classCode || !studentCode) {
+    return res.status(400).json({ message: 'Không được bỏ trống các trường.' });
+  }
+
+  try {
+    const user = await findOne(STUDENT, { userId });
+
+    if (!user) {
+      return res.status(403).json({ message: 'Không có quyền.' });
+    }
+
+    const classExist = await findOne(CLASS, { code: classCode });
+    if (!classExist) {
+      return res.status(400).json({ message: 'Lớp không tồn tại.' });
+    }
+
+    const isAdded = await findOne(CLASS_STUDENT, { classCode, studentCode });
+    if (isAdded) {
+      return res.status(400).json({ message: 'Bạn đã ở trong lớp này rồi.' });
+    }
+
+    await create(CLASS_STUDENT, {
+      id: uuidv4(),
+      classCode,
+      studentCode,
+    });
+
+    res.json({ message: 'Yêu cầu tham gia lớp thành công.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};

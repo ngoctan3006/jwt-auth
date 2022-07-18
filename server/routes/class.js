@@ -6,6 +6,7 @@ import {
   getClass,
   getClasses,
   removeStudentFromClass,
+  requestJoinClass,
   updateClass,
 } from '../controllers/class';
 import auth from '../middlewares/auth';
@@ -16,6 +17,7 @@ router.get('/', auth, getClasses);
 router.post('/', auth, createClass);
 router.post('/addStudent', auth, addStudentToClass);
 router.delete('/deleteStudent', auth, removeStudentFromClass);
+router.post('requestJoinClass', auth, requestJoinClass);
 router.get('/:code', auth, getClass);
 router.put('/:id', auth, updateClass);
 router.delete('/:id', auth, deleteClass);
