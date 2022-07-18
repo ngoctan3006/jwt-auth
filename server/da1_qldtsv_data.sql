@@ -38,6 +38,7 @@ CREATE TABLE `qldt`.`class` (
 );
 
 CREATE TABLE `qldt`.`class_student` (
+  `id` varchar(36) UNIQUE NOT NULL,
   `classCode` varchar(25) NOT NULL,
   `studentCode` varchar(10) NOT NULL,
   `midterm` double,

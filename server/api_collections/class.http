@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:5000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiZTYxMmQ3YzItNjU5ZS00Njk3LWE4ODEtNDgyNWM3ZTNmNTM0Iiwicm9sZSI6MSwiaWF0IjoxNjU4MDk1MjkwLCJleHAiOjE2NTgwOTg4OTB9.44KTu5G6zV5YNtTl6YnUcNzRJFEszJrtHMA10eKi1CI
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiZTYxMmQ3YzItNjU5ZS00Njk3LWE4ODEtNDgyNWM3ZTNmNTM0Iiwicm9sZSI6MSwiaWF0IjoxNjU4MTEzMTMyLCJleHAiOjE2NTgxMTY3MzJ9.uNbXAteyNyP1kQklE_pG9NoTVO6OOcKuNCOxX2fngwg
 
 # @name getClasses
 GET {{baseUrl}}/class
@@ -8,7 +8,7 @@ Authorization: Bearer {{token}}
 ###
 
 # @name getClass
-GET {{baseUrl}}/class/123123
+GET {{baseUrl}}/class/103175
 Authorization: Bearer {{token}}
 
 ###
@@ -38,4 +38,26 @@ Content-Type: application/json
   "subjectName": "Nhập môn CNTT",
   "semester": "20221",
   "room": "D9-401"
+}
+
+###
+
+# @name addStudent
+POST {{baseUrl}}/class/addStudent
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "classCode": "103176",
+  "studentCode": "20210011"
+}
+
+# @name deleteStudent
+DELETE {{baseUrl}}/class/deleteStudent
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "classCode": "103176",
+  "studentCode": "20210011"
 }

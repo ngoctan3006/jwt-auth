@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
-import { CLASS, TEACHER } from '../constants';
+import { CLASS, CLASS_STUDENT, STUDENT, TEACHER } from '../constants';
 import { create, deleteRow, find, findOne, update } from '../utils/db_querry';
 
 export const getClasses = async (req, res) => {
   const { id, role } = req.user;
   try {
     const user = await findOne(TEACHER, { userId: id });
-    if (!user || role !== 1) {
+    if (!user || role < 1) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
     const result = await find(CLASS, { teacherCode: user.code });
@@ -44,7 +44,7 @@ export const createClass = async (req, res) => {
   try {
     const user = await findOne(TEACHER, { userId });
 
-    if (!user || role !== 1) {
+    if (!user || role < 1) {
       return res.status(403).json({ message: 'Không có quyền.' });
     }
 
@@ -81,7 +81,7 @@ export const updateClass = async (req, res) => {
   try {
     const user = await findOne(TEACHER, { userId });
 
-    if (!user || role !== 1) {
+    if (!user || role < 1) {
       return res.status(403).json({ message: 'Không có quyền.' });
     }
 
@@ -117,6 +117,50 @@ export const deleteClass = async (req, res) => {
     await deleteRow(CLASS, { id });
 
     await res.json({ message: 'Xóa lớp thành công.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const addStudentToClass = async (req, res) => {
+  const { id: userId, role } = req.user;
+  const { classCode, studentCode } = req.body;
+
+  if (!classCode || !studentCode) {
+    return res.status(400).json({ message: 'Không được bỏ trống các trường.' });
+  }
+
+  try {
+    const user = await findOne(TEACHER, { userId });
+
+    if (!user || role < 1) {
+      return res.status(403).json({ message: 'Không có quyền.' });
+    }
+
+    const classExist = await findOne(CLASS, { code: classCode });
+    if (!classExist) {
+      return res.status(400).json({ message: 'Lớp không tồn tại.' });
+    }
+
+    const studentExist = await findOne(STUDENT, { code: studentCode });
+    if (!studentExist) {
+      return res.status(400).json({ message: 'Sinh viên không tồn tại.' });
+    }
+
+    const isAdded = await findOne(CLASS_STUDENT, { classCode, studentCode });
+    if (isAdded) {
+      return res.status(400).json({ message: 'Sinh viên đã có trong lớp.' });
+    }
+
+    await create(CLASS_STUDENT, {
+      id: uuidv4(),
+      classCode,
+      studentCode,
+      status: 1,
+    });
+
+    res.json({ message: 'Thêm sinh viên vào lớp thành công.' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
