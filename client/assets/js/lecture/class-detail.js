@@ -1,5 +1,6 @@
 const classCode = window.location.search.split('=')[1];
 let studentList = [];
+let studentPending = [];
 
 const renderStudentList = () => {
   const studentListHtml = studentList.map(
@@ -23,11 +24,30 @@ const renderStudentList = () => {
   $('#student-list-body').html(studentListHtml);
 };
 
+const renderPending = () => {
+  const pendingHtml = studentPending.map(
+    (item) => `
+      <tr>
+        <td width="10%">${item.code}</td>
+        <td width="25%">${item.fullname}</td>
+        <td width="10%">
+          <button class="btn btn-success"><i class="fa fa-fw fa-check"></i></button>
+          <button class="btn btn-danger"><i class="fa fa-fw fa-xmark"></i></button>
+        </td>
+      </tr>
+    `
+  );
+
+  $('#pending-body').html(pendingHtml);
+};
+
 (async () => {
   try {
     const { data: classInfo } = await API.get(`/class/${classCode}`);
-    const { data } = await API.get(`/students/student-list/${classCode}`);
-    studentList.push(...data);
+    const { data: studentInClass } = await API.get(`/students/student-list/${classCode}?status=1`);
+    const { data: pending } = await API.get(`/students/student-list/${classCode}?status=0`);
+    studentList.push(...studentInClass);
+    studentPending.push(...pending);
 
     $('#title').text(`${classInfo.code} - ${classInfo.subjectName.toUpperCase()}`);
 
@@ -38,6 +58,15 @@ const renderStudentList = () => {
     } else {
       $('#no-data').show();
       $('#student-list').hide();
+    }
+
+    if (studentPending.length) {
+      $('#no-data-pending').hide();
+      $('#pending').show();
+      renderPending();
+    } else {
+      $('#no-data-pending').show();
+      $('#pending').hide();
     }
   } catch (error) {
     console.log(error.response.data.message);
