@@ -16,7 +16,7 @@ export const find = (name, condition) => {
         if (error) {
           reject(error);
         } else {
-          resolve(results);
+          resolve(results.length ? results : null);
         }
       }
     );
@@ -34,7 +34,7 @@ export const findOne = (name, condition) => {
         if (error) {
           reject(error);
         } else {
-          resolve(results.length ? results[0] : undefined);
+          resolve(results.length ? results[0] : null);
         }
       }
     );
@@ -50,7 +50,7 @@ export const findInfo = (table, id) => {
         if (error) {
           reject(error);
         } else {
-          resolve(results.length ? results[0] : undefined);
+          resolve(results.length ? results[0] : null);
         }
       }
     );
@@ -125,6 +125,22 @@ export const deleteRow = (name, condition) => {
           reject(error);
         } else {
           resolve();
+        }
+      }
+    );
+  });
+};
+
+export const getStudentList = (classCode) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT * FROM ${DB_NAME}.class_student, ${DB_NAME}.student WHERE class_student.classCode = ? AND class_student.studentCode = student.code`,
+      [classCode],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results.length ? results : null);
         }
       }
     );

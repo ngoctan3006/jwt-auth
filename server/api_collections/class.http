@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:5000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiZTYxMmQ3YzItNjU5ZS00Njk3LWE4ODEtNDgyNWM3ZTNmNTM0Iiwicm9sZSI6MSwiaWF0IjoxNjU4MTEzMTMyLCJleHAiOjE2NTgxMTY3MzJ9.uNbXAteyNyP1kQklE_pG9NoTVO6OOcKuNCOxX2fngwg
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiZTYxMmQ3YzItNjU5ZS00Njk3LWE4ODEtNDgyNWM3ZTNmNTM0Iiwicm9sZSI6MSwiaWF0IjoxNjU4MTE4MzQ3LCJleHAiOjE2NTgxMjE5NDd9.Hsb0kZ0xDkI1hucUWFwfFmSSwQk7JaLjmn5BhxHotqQ
 
 # @name getClasses
 GET {{baseUrl}}/class
@@ -63,3 +63,9 @@ Content-Type: application/json
   "classCode": "103176",
   "studentCode": "20210011"
 }
+
+###
+
+# @name getStudentList
+GET {{baseUrl}}/students/student-list/103176
+Authorization: Bearer {{token}}

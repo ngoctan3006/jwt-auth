@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
-import { STUDENT, USER } from '../constants';
-import { create, findInfo } from '../utils/db_querry';
+import { STUDENT, TEACHER, USER } from '../constants';
+import { create, findInfo, findOne, getStudentList } from '../utils/db_querry';
 import { generateUsername } from '../utils/user';
 
 dotenv.config();
@@ -20,6 +20,26 @@ export const getMe = async (req, res) => {
       return res.json(result);
     }
     res.status(404).json({ message: 'Không tìm thấy thông tin.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getStudents = async (req, res) => {
+  const { id: userId, role } = req.user;
+  const { code } = req.params;
+
+  try {
+    const user = await findOne(TEACHER, { userId });
+
+    if (!user || role < 1) {
+      return res.status(401).json({ message: 'Bạn không có quyền thực hiện chức năng này.' });
+    }
+
+    const result = await getStudentList(code);
+
+    res.json(result);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
