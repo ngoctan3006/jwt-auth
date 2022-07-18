@@ -3,6 +3,7 @@
 Project sử dụng [NodeJS](https://nodejs.org/en/), [express](https://expressjs.com/) và MySQL.
 
 Tạo file `.env` ở trong `/server` với nội dung:
+
 ```
 JWT_SECRET = <mã bảo mật jwt>
 
@@ -17,4 +18,4 @@ Sử dụng `cd server` để đi tới thư mục `/server`.
 
 Sử dụng `npm i` hoặc `yarn` để cài các dependencies.
 
-Sử dụng `npm run dev` hoặc `yarn run dev` để chạy server trên môi trường development.
+Sử dụng `npm run dev` hoặc `yarn start:dev` để chạy server trên môi trường development.
