@@ -79,7 +79,7 @@ const renderClassList = () => {
   const classListHtml = classList
     .map(
       ({ id, code, room, semester, subjectName }) => `
-      <tr id=${code}>
+      <tr>
         <td><a href="class-detail.html?code=${code}">${code}</a></td>
         <td>${subjectName}</td>
         <td>${semester}</td>
