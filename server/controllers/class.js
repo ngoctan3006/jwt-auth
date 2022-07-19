@@ -283,3 +283,43 @@ export const requestJoinClass = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const inputStudentScore = async (req, res) => {
+  const { id: userId, role } = req.user;
+  const { classCode, studentCode, midterm, final } = req.body;
+
+  if (!classCode || !studentCode) {
+    return res.status(400).json({ message: 'Không được bỏ trống các trường.' });
+  }
+
+  try {
+    const user = await findOne(TEACHER, { userId });
+
+    if (!user || role < 1) {
+      return res.status(403).json({ message: 'Không có quyền.' });
+    }
+
+    const classExist = await findOne(CLASS, { code: classCode });
+    if (!classExist) {
+      return res.status(400).json({ message: 'Lớp không tồn tại.' });
+    }
+
+    const studentExist = await findOne(STUDENT, { code: studentCode });
+    if (!studentExist) {
+      return res.status(400).json({ message: 'Sinh viên không tồn tại.' });
+    }
+
+    const isAdded = await findOne(CLASS_STUDENT, { classCode, studentCode });
+    if (!isAdded) {
+      return res.status(400).json({ message: 'Sinh viên không có trong lớp.' });
+    } else if (isAdded.status !== 1) {
+      return res.status(400).json({ message: 'Sinh viên không có trong lớp.' });
+    }
+
+    await update(CLASS_STUDENT, { classCode, studentCode }, { midterm, final });
+    res.json({ message: 'Nhập điểm thành công.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
