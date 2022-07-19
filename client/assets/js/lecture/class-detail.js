@@ -19,6 +19,31 @@ const acceptStudent = async (e, code) => {
   }
 };
 
+const editStudent = (code) => {
+  const student = studentList.find((item) => item.code === code);
+  $('#edit-student-code').val(student.code);
+  $('#student-name').val(student.fullname);
+  $('#midterm').val(student.midterm);
+  $('#final').val(student.final);
+};
+
+const deleteStudent = async (e, code) => {
+  e.preventDefault();
+  const cf = confirm('Bạn có chắc chắn muốn xóa sinh viên này khỏi lớp?');
+  if (cf) {
+    try {
+      await API.delete('/class/delete-student', {
+        classCode,
+        studentCode: code,
+      });
+      alert('Xóa sinh viên thành công');
+      renderStudentList();
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  }
+};
+
 const renderStudentList = () => {
   const studentListHtml = studentList
     .map(
@@ -30,10 +55,12 @@ const renderStudentList = () => {
         <td>${item.midterm ? item.midterm : 'Chưa nhập'}</td>
         <td>${item.final ? item.final : 'Chưa nhập'}</td>
         <td>
-          <button class="btn btn-warning" data-toggle="modal" data-target="#editStudentModal"><i
-              class="fa fa-fw fa-edit"></i></button>
-          <button class="btn btn-danger" onclick=""><i
-              class="fa fa-fw fa-trash"></i></button>
+          <button class="btn btn-warning" data-toggle="modal" onclick="editStudent('${
+            item.code
+          }')" data-target="#editStudentModal"><i class="fa fa-fw fa-edit"></i></button>
+          <button class="btn btn-danger" onclick="deleteStudent(event, '${
+            item.code
+          }')"><i class="fa fa-fw fa-trash"></i></button>
         </td>
       </tr>
     `
@@ -51,7 +78,7 @@ const renderPending = () => {
         <td width="10%">${item.code}</td>
         <td width="25%">${item.fullname}</td>
         <td width="10%">
-          <button class="btn btn-success" onclick="acceptStudent(event,'${item.code}')"><i class="fa fa-fw fa-check"></i></button>
+          <button class="btn btn-success" onclick="acceptStudent(event, '${item.code}')"><i class="fa fa-fw fa-check"></i></button>
           <button class="btn btn-danger"><i class="fa fa-fw fa-xmark"></i></button>
         </td>
       </tr>
@@ -105,6 +132,22 @@ const addStudent = async (e) => {
     alert('Thêm sinh viên thành công');
     renderStudentList();
     $('#addStudentModal').modal('hide');
+  } catch (error) {
+    alert(error.response.data.message);
+  }
+};
+
+const updateStudentScore = async (e) => {
+  e.preventDefault();
+  const studentCode = $('#edit-student-code').val();
+  const midterm = $('#midterm').val();
+  const final = $('#final').val();
+
+  try {
+    await API.put('class/input-score', { classCode, studentCode, midterm, final });
+    alert('Cập nhật điểm thành công');
+    renderStudentList();
+    $('#editStudentModal').modal('hide');
   } catch (error) {
     alert(error.response.data.message);
   }

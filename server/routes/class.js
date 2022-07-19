@@ -18,7 +18,7 @@ const router = express.Router();
 router.get('/', auth, getClasses);
 router.post('/', auth, createClass);
 router.post('/addStudent', auth, addStudentToClass);
-router.delete('/deleteStudent', auth, removeStudentFromClass);
+router.delete('/delete-student', auth, removeStudentFromClass);
 router.post('/request-join-class', auth, requestJoinClass);
 router.put('/accept-student', auth, acceptStudent);
 router.put('/input-score', auth, inputStudentScore);

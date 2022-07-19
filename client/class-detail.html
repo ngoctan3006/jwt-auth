@@ -222,25 +222,25 @@
                 <form id="editStudentForm">
                   <div class="form-group">
                     <label>Mã sinh viên</label>
-                    <input type="text" class="form-control" style="width: 100%;" value="20211140" disabled>
+                    <input id="edit-student-code" type="text" class="form-control" style="width: 100%;" disabled>
                   </div>
                   <div class="form-group">
                     <label>Họ tên sinh viên</label>
-                    <input type="text" class="form-control" style="width: 100%;" value="Nguyễn Văn C" disabled>
+                    <input id="student-name" type="text" class="form-control" style="width: 100%;" disabled>
                   </div>
                   <div class="form-group">
                     <label>Điểm giữa kỳ</label>
-                    <input type="text" class="form-control" id="mark1" style="width: 100%;" value="7.5">
+                    <input id="midterm" type="text" class="form-control" id="mark1" style="width: 100%;">
                   </div>
                   <div class="form-group">
                     <label>Điểm cuối kỳ</label>
-                    <input type="text" class="form-control" id="mark2" style="width: 100%;" value="8.0">
+                    <input id="final" type="text" class="form-control" id="mark2" style="width: 100%;">
                   </div>
                 </form>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                <button class="btn btn-primary" data-dismiss="modal">Cập nhật</button>
+                <button class="btn btn-primary" onclick="updateStudentScore(event)">Cập nhật</button>
               </div>
             </div>
           </div>
