@@ -19,11 +19,11 @@ const addClass = async () => {
       data: { message },
     } = await API.post('/class', data);
     alert(message);
+    $('#addClassModal').modal('hide');
+    fetchClass();
   } catch (error) {
     alert(error.response.data.message);
   }
-
-  $('#addClassModal').modal('hide');
 };
 
 const editClass = (id) => {
@@ -46,32 +46,25 @@ const updateClass = async (id) => {
   const semester = $('#edit-semester').val();
   const room = $('#edit-room').val();
   const newClass = { ...oldClass, classCode, subjectName, semester, room };
-  classList = classList.map((item) => (item.id === id ? newClass : item));
   try {
     await API.put(`/class/${id}`, newClass);
     alert('Cập nhật thành công!');
     $('#editClassModal').modal('hide');
+    fetchClass();
   } catch (error) {
     alert(error.response.data.message);
   }
-  renderClassList();
 };
 
 const deleteClass = async (id) => {
+  const cf = confirm('Bạn có chắc chắn muốn xóa lớp này?');
+  if (!cf) return;
   try {
     await API.delete(`/class/${id}`);
     alert('Xóa thành công!');
+    fetchClass();
   } catch (error) {
     alert(error.response.data.message);
-  }
-  classList = classList.filter((item) => item.id !== id);
-  if (classList.length) {
-    $('#no-data').hide();
-    $('#class-list').show();
-    renderClassList();
-  } else {
-    $('#no-data').show();
-    $('#class-list').hide();
   }
 };
 
@@ -105,10 +98,10 @@ const renderClassList = () => {
   $('#class-list-body').html(classListHtml);
 };
 
-(async () => {
+const fetchClass = async () => {
   try {
     const { data } = await API.get('/class');
-    classList.push(...data);
+    classList = data;
     if (classList.length) {
       $('#no-data').hide();
       $('#class-list').show();
@@ -120,4 +113,6 @@ const renderClassList = () => {
   } catch (error) {
     alert(error.response.data.message);
   }
-})();
+};
+
+fetchClass();

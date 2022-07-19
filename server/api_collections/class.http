@@ -55,7 +55,7 @@ Content-Type: application/json
 ###
 
 # @name deleteStudent
-DELETE {{baseUrl}}/class/delete-student
+POST {{baseUrl}}/class/delete-student
 Authorization: Bearer {{token}}
 Content-Type: application/json
 

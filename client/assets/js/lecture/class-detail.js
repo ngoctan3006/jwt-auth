@@ -10,10 +10,7 @@ const acceptStudent = async (e, code) => {
       studentCode: code,
     });
     alert('Đã thêm sinh viên vào lớp.');
-    studentList.push(studentPending.find((item) => item.code === code));
-    studentPending = studentPending.filter((item) => item.code !== code);
-    renderPending();
-    renderStudentList();
+    getClassInfo();
   } catch (error) {
     alert(error.response.data.message);
   }
@@ -32,12 +29,12 @@ const deleteStudent = async (e, code) => {
   const cf = confirm('Bạn có chắc chắn muốn xóa sinh viên này khỏi lớp?');
   if (cf) {
     try {
-      await API.delete('/class/delete-student', {
+      await API.post('/class/delete-student', {
         classCode,
         studentCode: code,
       });
       alert('Xóa sinh viên thành công');
-      renderStudentList();
+      getClassInfo();
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -89,13 +86,13 @@ const renderPending = () => {
   $('#pending-body').html(pendingHtml);
 };
 
-(async () => {
+const getClassInfo = async () => {
   try {
     const { data: classInfo } = await API.get(`/class/${classCode}`);
     const { data: studentInClass } = await API.get(`/students/student-list/${classCode}?status=1`);
     const { data: pending } = await API.get(`/students/student-list/${classCode}?status=0`);
-    if (studentInClass?.length) studentList.push(...studentInClass);
-    if (pending?.length) studentPending.push(...pending);
+    studentList = studentInClass?.length ? studentInClass : [];
+    studentPending = pending?.length ? pending : [];
 
     $('#title').text(`${classInfo.code} - ${classInfo.subjectName.toUpperCase()}`);
 
@@ -120,7 +117,9 @@ const renderPending = () => {
     console.log(error);
     alert(error.response.data.message);
   }
-})();
+};
+
+getClassInfo();
 
 const addStudent = async (e) => {
   e.preventDefault();
@@ -130,8 +129,9 @@ const addStudent = async (e) => {
       studentCode: $('#student-code').val(),
     });
     alert('Thêm sinh viên thành công');
-    renderStudentList();
     $('#addStudentModal').modal('hide');
+    $('#student-code').val('');
+    getClassInfo();
   } catch (error) {
     alert(error.response.data.message);
   }
@@ -146,8 +146,8 @@ const updateStudentScore = async (e) => {
   try {
     await API.put('class/input-score', { classCode, studentCode, midterm, final });
     alert('Cập nhật điểm thành công');
-    renderStudentList();
     $('#editStudentModal').modal('hide');
+    getClassInfo();
   } catch (error) {
     alert(error.response.data.message);
   }
