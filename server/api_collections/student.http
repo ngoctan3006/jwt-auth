@@ -44,3 +44,11 @@ Authorization: Bearer {{token}}
 {
   "classCode": "103175"
 }
+
+###
+
+# @name getScore
+GET {{baseUrl}}/students/score/103176
+Authorization: Bearer {{token}}
+
+###
