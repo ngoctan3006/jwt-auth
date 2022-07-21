@@ -6,6 +6,7 @@ import {
   deleteClass,
   getClass,
   getClasses,
+  getClassesStudent,
   inputStudentScore,
   removeStudentFromClass,
   requestJoinClass,
@@ -16,6 +17,7 @@ import auth from '../middlewares/auth';
 const router = express.Router();
 
 router.get('/', auth, getClasses);
+router.get('/student', auth, getClassesStudent);
 router.post('/', auth, createClass);
 router.post('/addStudent', auth, addStudentToClass);
 router.post('/delete-student', auth, removeStudentFromClass);

@@ -146,3 +146,19 @@ export const getStudentList = ({ code, status }) => {
     );
   });
 };
+
+export const getStudentClass = (studentCode) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `SELECT * FROM ${DB_NAME}.class_student, ${DB_NAME}.class WHERE class_student.studentCode = ? AND class_student.classCode = class.code`,
+      [studentCode],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results.length ? results : null);
+        }
+      }
+    );
+  });
+};

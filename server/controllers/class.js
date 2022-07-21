@@ -1,15 +1,30 @@
 import { v4 as uuidv4 } from 'uuid';
 import { CLASS, CLASS_STUDENT, STUDENT, TEACHER } from '../constants';
-import { create, deleteRow, find, findOne, update } from '../utils/db_querry';
+import { create, deleteRow, find, findOne, getStudentClass, update } from '../utils/db_querry';
 
 export const getClasses = async (req, res) => {
-  const { id, role } = req.user;
+  const { id: userId, role } = req.user;
   try {
-    const user = await findOne(TEACHER, { userId: id });
+    const user = await findOne(TEACHER, { userId });
     if (!user || role < 1) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
     const result = await find(CLASS, { teacherCode: user.code });
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getClassesStudent = async (req, res) => {
+  const { id: userId } = req.user;
+  try {
+    const user = await findOne(STUDENT, { userId });
+    if (!user) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    const result = await getStudentClass(user.code);
     res.json(result);
   } catch (error) {
     console.log(error);
