@@ -10,7 +10,7 @@ const renderClassList = () => {
           <td>${semester}</td>
           <td>${room}</td>
           <td>
-              <button class="btn btn-danger" onclick="deleteClass(this)"><i class="fa-solid fa-right-from-bracket"></i></button>
+              <button class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></button>
           </td>
         </tr>
       `
@@ -38,3 +38,15 @@ const fetchClass = async () => {
 };
 
 fetchClass();
+
+const joinClass = async (e) => {
+  e.preventDefault();
+  const classCode = $('#class-code').val();
+  try {
+    await API.post('class/request-join-class', { classCode });
+    alert('Đã gửi yêu cầu tham gia lớp thành công, hãy đợi giáo viên chấp nhận bạn vào lớp!');
+    $('#registerModal').modal('hide');
+  } catch (error) {
+    alert(error.response.data.message);
+  }
+};
