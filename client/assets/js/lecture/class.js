@@ -101,7 +101,7 @@ const renderClassList = () => {
 const fetchClass = async () => {
   try {
     const { data } = await API.get('/class');
-    classList = data;
+    classList = data ? data : [];
     if (classList.length) {
       $('#no-data').hide();
       $('#class-list').show();

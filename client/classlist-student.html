@@ -28,11 +28,11 @@
     <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./index-student.html">
         <div class="sidebar-brand-icon">
           <i class="fas fa-user"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Nguyễn Văn Nam</div>
+        <div id="student-name" class="sidebar-brand-text mx-3"></div>
       </a>
 
       <!-- Divider -->
@@ -134,7 +134,8 @@
                     <button class="btn btn-success" style="width: 200px;" data-toggle="modal" data-target="#registerModal"><i class="fa fa-plus"></i> Đăng ký lớp học</button>
                 </div>
                 <div class="col-md-12" style="margin-top: 40px;">
-                    <table class="table table-striped">
+                  <div id="no-data" class="text-center">Không có dữ liệu</div>
+                    <table id="class-list" class="table table-striped">
                         <thead>
                             <tr>
                                 <th width="5%">Mã lớp</th>
@@ -144,7 +145,7 @@
                                 <th width="10%"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="class-list-body">
                             <tr id="class01">
                                 <td><a href="class-detail-student.html">103175</a></td>
                                 <td>Kỹ thuật lập trình</td>
@@ -271,8 +272,17 @@
   <!-- Core plugin JavaScript-->
   <script src="./assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+  <!-- axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
   <!-- Custom scripts for all pages-->
   <script src="./assets/js/my_script.js"></script>
+
+  <!-- API -->
+  <script src="./assets/js/constants.js"></script>
+  <script src="./assets/js/api.js"></script>
+  <script src="./assets/js/student/info.js"></script>
+  <script src="./assets/js/student/class.js"></script>
 
 </body>
 
