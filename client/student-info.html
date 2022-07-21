@@ -65,7 +65,7 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="student-info.html">Thông tin cá nhân</a>
+              <a class="collapse-item" href="./student-info.html">Thông tin cá nhân</a>
               <a class="collapse-item" onclick="logout()" href="JavaScript:void(0);">Đăng xuất</a>
             </div>
           </div>
@@ -118,6 +118,7 @@
             <!-- Topbar Search -->
             <form
               class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+              onsubmit="search(event)"
             >
               <div class="input-group">
                 <input
@@ -155,7 +156,7 @@
                   class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                   aria-labelledby="searchDropdown"
                 >
-                  <form class="form-inline mr-auto w-100 navbar-search">
+                  <form class="form-inline mr-auto w-100 navbar-search" onsubmit="search(event)">
                     <div class="input-group">
                       <input
                         type="text"
@@ -320,7 +321,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a href="JavaScript:void(0);" class="btn btn-primary">Logout</a>
+            <a onclick="logout()" href="JavaScript:void(0);" class="btn btn-primary">Logout</a>
           </div>
         </div>
       </div>

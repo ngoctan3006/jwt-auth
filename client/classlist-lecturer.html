@@ -66,7 +66,7 @@
           >
             <div class="bg-white py-2 collapse-inner rounded">
               <a class="collapse-item" href="./lecturer-info.html">Thông tin cá nhân</a>
-              <a class="collapse-item" href="./login.html">Đăng xuất</a>
+              <a class="collapse-item" href="JavaScript:void(0);" onclick="logout()">Đăng xuất</a>
             </div>
           </div>
         </li>
@@ -118,6 +118,7 @@
             <!-- Topbar Search -->
             <form
               class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+              onsubmit="search(event)"
             >
               <div class="input-group">
                 <input
@@ -155,7 +156,7 @@
                   class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                   aria-labelledby="searchDropdown"
                 >
-                  <form class="form-inline mr-auto w-100 navbar-search">
+                  <form class="form-inline mr-auto w-100 navbar-search" onsubmit="search(event)">
                     <div class="input-group">
                       <input
                         type="text"
@@ -229,7 +230,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form id="addClassForm">
+                  <form id="addClassForm" onsubmit="addClass(event)">
                     <div class="form-group">
                       <label for="class-code">Mã lớp học</label>
                       <input type="text" id="class-code" class="form-control" style="width: 100%" />
@@ -262,7 +263,7 @@
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                  <button class="btn btn-primary" onclick="addClass()">Thêm</button>
+                  <button class="btn btn-primary" onclick="addClass(event)">Thêm</button>
                 </div>
               </div>
             </div>
@@ -287,7 +288,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form id="editClassForm">
+                  <form id="editClassForm" onsubmit="updateClass(event, currClass)">
                     <div class="form-group">
                       <label for="edit-class-code">Mã lớp học</label>
                       <input
@@ -325,7 +326,9 @@
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                  <button class="btn btn-primary" onclick="updateClass(currClass)">Cập nhật</button>
+                  <button class="btn btn-primary" onclick="updateClass(event, currClass)">
+                    Cập nhật
+                  </button>
                 </div>
               </div>
             </div>
@@ -374,7 +377,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="JavaScript:void(0);" onclick="logout()">Logout</a>
           </div>
         </div>
       </div>

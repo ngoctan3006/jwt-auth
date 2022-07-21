@@ -1,7 +1,8 @@
 let classList = [];
 let currClass = null;
 
-const addClass = async () => {
+const addClass = async (e) => {
+  e.preventDefault();
   const classCode = $('#class-code').val();
   const subjectName = $('#subject-name').val();
   const semester = $('#semester').val();
@@ -39,7 +40,8 @@ const editClass = (id) => {
   }
 };
 
-const updateClass = async (id) => {
+const updateClass = async (e, id) => {
+  e.preventDefault();
   const oldClass = classList.find((item) => item.id === id);
   const classCode = $('#edit-class-code').val();
   const subjectName = $('#edit-subject-name').val();

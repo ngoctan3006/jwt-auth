@@ -89,7 +89,7 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="./classlist-lecturer.html">Danh sách lớp học</a>
+              <a class="collapse-item" href="./classlist-student.html">Danh sách lớp học</a>
             </div>
           </div>
         </li>
@@ -118,6 +118,7 @@
             <!-- Topbar Search -->
             <form
               class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+              onsubmit="search(event)"
             >
               <div class="input-group">
                 <input
@@ -155,7 +156,7 @@
                   class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                   aria-labelledby="searchDropdown"
                 >
-                  <form class="form-inline mr-auto w-100 navbar-search">
+                  <form class="form-inline mr-auto w-100 navbar-search" onsubmit="search(event)">
                     <div class="input-group">
                       <input
                         type="text"
@@ -229,7 +230,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form id="addClassForm">
+                  <form id="addClassForm" onsubmit="joinClass(event)">
                     <div class="form-group">
                       <label for="class-id">Mã lớp học</label>
                       <input type="text" class="form-control" id="class-code" style="width: 100%" />
@@ -285,7 +286,7 @@
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="./login.html">Logout</a>
+              <a class="btn btn-primary" href="JavaScript:void(0);" onclick="logout()">Logout</a>
             </div>
           </div>
         </div>

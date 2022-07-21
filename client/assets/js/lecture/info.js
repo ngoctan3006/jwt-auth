@@ -19,3 +19,7 @@ const logout = () => {
   localStorage.removeItem(STORAGE_TOKEN_KEY);
   window.location.href = './login.html';
 };
+
+const search = (e) => {
+  e.preventDefault();
+};
