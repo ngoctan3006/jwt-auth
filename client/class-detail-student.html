@@ -89,7 +89,7 @@
             data-parent="#accordionSidebar"
           >
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="classlist-student.html">Danh sách lớp học</a>
+              <a class="collapse-item" href="./classlist-student.html">Danh sách lớp học</a>
             </div>
           </div>
         </li>
@@ -182,11 +182,11 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-10 mb-4">
-                <h3>103175 - KỸ THUẬT LẬP TRÌNH</h3>
+                <h3 id="title"></h3>
                 <hr />
               </div>
               <div class="col-md-2">
-                <button class="btn btn-block btn-danger" onclick="leaveClass()">
+                <button class="btn btn-block btn-danger" onclick="outClass()">
                   <i class="fa-solid fa-right-from-bracket"></i> Rời lớp
                 </button>
               </div>
@@ -200,8 +200,8 @@
                       <td>Điểm cuối kỳ</td>
                     </tr>
                     <tr style="font-weight: bolder; font-size: 30px">
-                      <td>6.5</td>
-                      <td>8.0</td>
+                      <td id="midterm"></td>
+                      <td id="final"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -210,12 +210,6 @@
           </div>
         </div>
         <!-- /.container-fluid -->
-        <script>
-          function leaveClass(obj) {
-            var cf = confirm('Bạn muốn xóa sinh viên này ra khỏi lớp?');
-            if (!cf) return;
-          }
-        </script>
         <!-- End of Main Content -->
 
         <!-- Footer -->
@@ -259,7 +253,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="JavaScript:void(0);" onclick="logout()">Logout</a>
           </div>
         </div>
       </div>
@@ -272,7 +266,16 @@
     <!-- Core plugin JavaScript-->
     <script src="./assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <!-- Custom scripts for all pages-->
     <script src="./assets/js/my_script.js"></script>
+
+    <!-- API -->
+    <script src="./assets/js/constants.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/student/info.js"></script>
+    <script src="./assets/js/student/class-detail.js"></script>
   </body>
 </html>
