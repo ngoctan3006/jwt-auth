@@ -76,7 +76,7 @@ const renderPending = () => {
         <td width="25%">${item.fullname}</td>
         <td width="10%">
           <button class="btn btn-success" onclick="acceptStudent(event, '${item.code}')"><i class="fa fa-fw fa-check"></i></button>
-          <button class="btn btn-danger"><i class="fa fa-fw fa-xmark"></i></button>
+          <button class="btn btn-danger" onclick="deleteStudent(event, '${item.code}')"><i class="fa fa-fw fa-xmark"></i></button>
         </td>
       </tr>
     `
