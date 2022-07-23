@@ -19,7 +19,7 @@ export const getMe = async (req, res) => {
     if (result) {
       return res.json(result);
     }
-    res.status(404).json({ message: 'Không tìm thấy thông tin.' });
+    res.status(404).json({ message: 'Không tìm thấy thông tin!' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
@@ -35,7 +35,7 @@ export const getStudents = async (req, res) => {
     const user = await findOne(TEACHER, { userId });
 
     if (!user || role < 1) {
-      return res.status(401).json({ message: 'Bạn không có quyền thực hiện chức năng này.' });
+      return res.status(401).json({ message: 'Bạn không có quyền thực hiện chức năng này!' });
     }
 
     const result = await getStudentList({ code, status });
@@ -52,7 +52,7 @@ export const createStudent = async (req, res) => {
   const { role } = req.user;
 
   if (role < 2) {
-    return res.status(403).json({ message: 'Bạn không có quyền thực hiện chức năng này.' });
+    return res.status(403).json({ message: 'Bạn không có quyền thực hiện chức năng này!' });
   }
 
   try {
@@ -60,6 +60,12 @@ export const createStudent = async (req, res) => {
     const password = '123456';
     const hash = await bcrypt.hash(password, 12);
     const id = uuidv4();
+
+    const isExistUser = await findOne(USER, { username });
+    const isExistStudent = await findOne(STUDENT, { code });
+    if (isExistUser || isExistStudent) {
+      return res.status(400).json({ message: 'Mã số sinh viên đã tồn tại!' });
+    }
 
     const user = await create(USER, {
       id,
@@ -89,13 +95,13 @@ export const getScore = async (req, res) => {
     const user = await findOne(STUDENT, { userId });
 
     if (!user) {
-      return res.status(401).json({ message: 'Bạn không có quyền thực hiện chức năng này.' });
+      return res.status(401).json({ message: 'Bạn không có quyền thực hiện chức năng này!' });
     }
 
     const result = await getStudentClassInfo({ studentCode: user.code, classCode: code });
 
     if (!result) {
-      return res.status(404).json({ message: 'Không tìm thấy thông tin.' });
+      return res.status(404).json({ message: 'Không tìm thấy thông tin!' });
     }
 
     res.json(result);
