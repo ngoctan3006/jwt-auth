@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SidebarAdmin extends React.Component {
   render() {
@@ -7,20 +8,20 @@ class SidebarAdmin extends React.Component {
         className="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"
         id="accordionSidebar"
       >
-        <a
+        <Link
           className="sidebar-brand d-flex align-items-center justify-content-center"
-          href="/admin/"
+          to="/admin"
         >
           <div className="sidebar-brand-icon">
             <i className="fas fa-user"></i>
           </div>
           <div id="lecture-name" className="sidebar-brand-text mx-3"></div>
-        </a>
+        </Link>
         <hr className="sidebar-divider my-0" />
         <li className="nav-item">
-          <a
+          <Link
             className="nav-link collapsed"
-            href="# "
+            to="#"
             data-toggle="collapse"
             data-target="#collapseTwo"
             aria-expanded="true"
@@ -28,7 +29,7 @@ class SidebarAdmin extends React.Component {
           >
             <i className="fas fa-fw fa-user"></i>
             <span>Quản lý tài khoản</span>
-          </a>
+          </Link>
           <div
             id="collapseTwo"
             className="collapse"
@@ -36,20 +37,20 @@ class SidebarAdmin extends React.Component {
             data-parent="#accordionSidebar"
           >
             <div className="bg-white py-2 collapse-inner rounded">
-              <a className="collapse-item" href="/admin/info">
+              <Link className="collapse-item" to="/admin/info">
                 Thông tin cá nhân
-              </a>
-              <a href="# " className="collapse-item" data-toggle="modal" data-target="#logoutModal">
+              </Link>
+              <Link to="#" className="collapse-item" data-toggle="modal" data-target="#logoutModal">
                 Đăng xuất
-              </a>
+              </Link>
             </div>
           </div>
         </li>
         <li className="nav-item">
-          <a className="nav-link collapsed" href="/admin/accountlist">
+          <Link className="nav-link collapsed" to="/admin/accountlist">
             <i className="fas fa-fw fa-building"></i>
             <span>Danh sách tài khoản</span>
-          </a>
+          </Link>
         </li>
         <hr className="sidebar-divider d-none d-md-block" />
         <div className="text-center d-none d-md-inline">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AddStudentModal from '../../components/modals/add-student-modal';
 import EditStudentModal from '../../components/modals/edit-student-modal';
 import InputMarkModal from '../../components/modals/input-mark';
@@ -109,9 +110,9 @@ class LecturerClassDetail extends React.Component {
             <Footer />
           </div>
         </div>
-        <a className="scroll-to-top rounded" href="#page-top">
+        <Link className="scroll-to-top rounded" to="#page-top">
           <i className="fas fa-angle-up"></i>
-        </a>
+        </Link>
         <LogoutModal />
       </div>
     );

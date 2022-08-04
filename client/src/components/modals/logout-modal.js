@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class LogoutModal extends React.Component {
   render() {
@@ -26,9 +27,9 @@ class LogoutModal extends React.Component {
               <button className="btn btn-secondary" type="button" data-dismiss="modal">
                 Bỏ qua
               </button>
-              <a className="btn btn-primary" href="# ">
+              <Link className="btn btn-primary" to="#">
                 Đăng xuất
-              </a>
+              </Link>
             </div>
           </div>
         </div>

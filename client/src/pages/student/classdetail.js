@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import LogoutModal from '../../components/modals/logout-modal';
 import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
@@ -56,9 +57,9 @@ class StudentClassDetail extends React.Component {
             <Footer />
           </div>
         </div>
-        <a className="scroll-to-top rounded" href="#page-top">
+        <Link className="scroll-to-top rounded" to="#page-top">
           <i className="fas fa-angle-up"></i>
-        </a>
+        </Link>
         <LogoutModal />
       </div>
     );

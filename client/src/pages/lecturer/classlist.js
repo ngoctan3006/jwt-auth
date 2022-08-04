@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AddClassModal from '../../components/modals/add-class-modal';
 import EditClassModal from '../../components/modals/edit-class-modal';
 import LogoutModal from '../../components/modals/logout-modal';
@@ -85,9 +86,9 @@ class LecturerClasslist extends React.Component {
             <Footer />
           </div>
         </div>
-        <a className="scroll-to-top rounded" href="#page-top">
+        <Link className="scroll-to-top rounded" to="#page-top">
           <i className="fas fa-angle-up"></i>
-        </a>
+        </Link>
         <LogoutModal />
       </div>
     );

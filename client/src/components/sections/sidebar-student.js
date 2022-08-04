@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SidebarStudent extends React.Component {
   render() {
@@ -7,20 +8,20 @@ class SidebarStudent extends React.Component {
         className="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"
         id="accordionSidebar"
       >
-        <a
+        <Link
           className="sidebar-brand d-flex align-items-center justify-content-center"
-          href="/student/"
+          to="/student"
         >
           <div className="sidebar-brand-icon">
             <i className="fas fa-user"></i>
           </div>
           <div id="lecture-name" className="sidebar-brand-text mx-3"></div>
-        </a>
+        </Link>
         <hr className="sidebar-divider my-0" />
         <li className="nav-item">
-          <a
+          <Link
             className="nav-link collapsed"
-            href="# "
+            to="#"
             data-toggle="collapse"
             data-target="#collapseTwo"
             aria-expanded="true"
@@ -28,7 +29,7 @@ class SidebarStudent extends React.Component {
           >
             <i className="fas fa-fw fa-user"></i>
             <span>Quản lý tài khoản</span>
-          </a>
+          </Link>
           <div
             id="collapseTwo"
             className="collapse"
@@ -36,19 +37,19 @@ class SidebarStudent extends React.Component {
             data-parent="#accordionSidebar"
           >
             <div className="bg-white py-2 collapse-inner rounded">
-              <a className="collapse-item" href="/student/info">
+              <Link className="collapse-item" to="/student/info">
                 Thông tin cá nhân
-              </a>
-              <a href="# " className="collapse-item" data-toggle="modal" data-target="#logoutModal">
+              </Link>
+              <Link to="#" className="collapse-item" data-toggle="modal" data-target="#logoutModal">
                 Đăng xuất
-              </a>
+              </Link>
             </div>
           </div>
         </li>
         <li className="nav-item">
-          <a
+          <Link
             className="nav-link collapsed"
-            href="# "
+            to="#"
             data-toggle="collapse"
             data-target="#collapseUtilities"
             aria-expanded="true"
@@ -56,7 +57,7 @@ class SidebarStudent extends React.Component {
           >
             <i className="fas fa-fw fa-building"></i>
             <span>Quản lý lớp học</span>
-          </a>
+          </Link>
           <div
             id="collapseUtilities"
             className="collapse"
@@ -64,9 +65,9 @@ class SidebarStudent extends React.Component {
             data-parent="#accordionSidebar"
           >
             <div className="bg-white py-2 collapse-inner rounded">
-              <a className="collapse-item" href="/student/classlist">
+              <Link className="collapse-item" to="/student/classlist">
                 Danh sách lớp học
-              </a>
+              </Link>
             </div>
           </div>
         </li>

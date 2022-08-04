@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 class AccountlistItem extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     return (
@@ -11,7 +11,7 @@ class AccountlistItem extends Component {
         <td>{this.props.id}</td>
         <td>{this.props.name}</td>
         <td>{this.props.username}</td>
-        <td>{this.props.role == 'Role_Lecturer' ? 'Giảng viên' : 'Sinh viên'}</td>
+        <td>{this.props.role === 'Role_Lecturer' ? 'Giảng viên' : 'Sinh viên'}</td>
         <td>
           <button className="btn btn-danger" onClick={this.deleteAccount}>
             <i className="fa fa-fw fa-trash"></i>
