@@ -1,5 +1,12 @@
 @baseUrl = http://localhost:5000/api/v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiYzBiZDFmYjItOGFiMS00OTVjLTk2NDgtYzEzY2JlZGY3YTJhIiwicm9sZSI6MSwiaWF0IjoxNjU4MDU2MTQzLCJleHAiOjE2NTgwNTk3NDN9.3FvlCi6pH8_0MgBKsGX5wGv0RLpHCkiLOWp17b1nAJ8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1bmcudHJhbnZhbiIsImlkIjoiZTYxMmQ3YzItNjU5ZS00Njk3LWE4ODEtNDgyNWM3ZTNmNTM0Iiwicm9sZSI6MSwiaWF0IjoxNjU5NjAyNTIxLCJleHAiOjE2NTk2MDYxMjF9.AMOCAll8-2xM-PqV3nwb3fnSg_SjsKecq0b0iTo_kQ0
+
+# @name getMe
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+
+###
 
 # @name signup
 POST {{baseUrl}}/users/signup

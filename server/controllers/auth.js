@@ -2,10 +2,35 @@ import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
-import { USER } from '../constants';
-import { create, findOne, update } from '../utils/db_querry';
+import { STUDENT, TEACHER, USER } from '../constants';
+import { create, findInfo, findOne, update } from '../utils/db_querry';
 
 dotenv.config();
+
+export const getMe = async (req, res) => {
+  const {
+    user: { id, role },
+  } = req;
+
+  try {
+    let result;
+    if (role === 0) {
+      result = await findInfo(STUDENT, id);
+    } else if (role === 1) {
+      result = await findInfo(TEACHER, id);
+    }
+
+    delete result.password;
+
+    if (result) {
+      return res.json(result);
+    }
+    res.status(404).json({ message: 'Không tìm thấy thông tin!' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export const signin = async (req, res) => {
   const { username, role, password: pw } = req.body;

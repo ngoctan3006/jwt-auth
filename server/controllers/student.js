@@ -14,7 +14,6 @@ export const getMe = async (req, res) => {
     const result = await findInfo(STUDENT, user.id);
 
     delete result.password;
-    delete result.role;
 
     if (result) {
       return res.json(result);
