@@ -46,19 +46,26 @@ export const signin = async (req, res) => {
       return res.status(400).json({ message: 'Sai tên đăng nhập hoặc mật khẩu!' });
     }
 
+    let result;
+    if (existingUser.role === 0) {
+      result = await findInfo(STUDENT, existingUser.id);
+    } else if (existingUser.role === 1) {
+      result = await findInfo(TEACHER, existingUser.id);
+    }
+
     const token = jwt.sign(
       {
-        username: existingUser.username,
-        id: existingUser.id,
-        role: existingUser.role,
+        username: result.username,
+        id: result.id,
+        role: result.role,
       },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    delete existingUser.password;
+    delete result.password;
 
-    res.json({ user: existingUser, token });
+    res.json({ user: result, token });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
