@@ -1,12 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ChangePasswordModal from '../../components/modals/change-password-modal';
 import LogoutModal from '../../components/modals/logout-modal';
 import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarLecturer from '../../components/sections/sidebar-lecturer';
+import { changePassword, logoutUser } from '../auth/authSlice';
 
 class LecturerInfo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpenChangePasswordModal: false,
+      isOpenLogoutModal: false,
+    };
+  }
+
+  handleChangePassword = async (formData) => {
+    try {
+      const res = await this.props.changePassword(formData);
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   render() {
     return (
       <div id="page-top">
@@ -31,6 +50,7 @@ class LecturerInfo extends React.Component {
                           id="username"
                           style={{ width: '50%' }}
                           disabled
+                          value={this.props.user.user.username}
                         />
                       </div>
                       <div className="form-group">
@@ -41,6 +61,7 @@ class LecturerInfo extends React.Component {
                           id="fullname"
                           style={{ width: '50%' }}
                           disabled
+                          value={this.props.user.user.fullname}
                         />
                       </div>
                       <div className="form-group">
@@ -57,7 +78,7 @@ class LecturerInfo extends React.Component {
                   </div>
                 </div>
               </div>
-              <ChangePasswordModal />
+              <ChangePasswordModal onOk={this.handleChangePassword} logout={this.logoutUser} />
             </div>
             <Footer />
           </div>
@@ -71,4 +92,10 @@ class LecturerInfo extends React.Component {
   }
 }
 
-export default LecturerInfo;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+const mapDispatchToProps = { changePassword, logoutUser };
+
+export default connect(mapStateToProps, mapDispatchToProps)(LecturerInfo);

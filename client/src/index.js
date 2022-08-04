@@ -19,9 +19,10 @@ import StudentClasslist from './pages/student/classlist';
 import StudentInfo from './pages/student/info';
 
 const ProtectedRoute = ({ children, role }) => {
+  // const dispatch = useDispatch();
+  // dispatch(getInfo());
   const user = useSelector((state) => state.auth.user);
   // const token = localStorage.getItem('token');
-  console.log(user);
   if (!user && user?.role !== role) {
     return <Navigate to="/login" />;
   }

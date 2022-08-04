@@ -1,6 +1,38 @@
 import React, { Component } from 'react';
+import { withRouter } from '../../utils/withRouter';
 
 class ChangePasswordModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: '',
+      confirmPassword: '',
+      oldPassword: '',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await this.props.onOk(this.state);
+      alert('Thay đổi mật khẩu thành công!');
+      localStorage.removeItem('token');
+      // this.props.logout();
+      this.props.navigate('/login');
+    } catch (error) {
+      alert(error?.response?.data?.message || error);
+    }
+  };
+
   render() {
     return (
       <div
@@ -22,18 +54,39 @@ class ChangePasswordModal extends Component {
               </button>
             </div>
             <div className="modal-body">
-              <form id="change-password" onsubmit="changePassword(event)">
+              <form id="change-password">
                 <div className="form-group">
                   <label>Nhập mật khẩu cũ</label>
-                  <input type="password" className="form-control" id="old-pass" />
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="old-pass"
+                    name="oldPassword"
+                    value={this.state.oldPassword}
+                    onChange={this.handleChange}
+                  />
                 </div>
                 <div className="form-group">
                   <label>Nhập mật khẩu mới</label>
-                  <input type="password" className="form-control" id="new-pass" />
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="new-pass"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
                 </div>
                 <div className="form-group">
                   <label>Nhập lại mật khẩu mới</label>
-                  <input type="password" className="form-control" id="cf-pass" />
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="cf-pass"
+                    name="confirmPassword"
+                    value={this.state.confirmPassword}
+                    onChange={this.handleChange}
+                  />
                 </div>
               </form>
             </div>
@@ -41,7 +94,9 @@ class ChangePasswordModal extends Component {
               <button className="btn btn-secondary" data-dismiss="modal">
                 Bỏ qua
               </button>
-              <button className="btn btn-primary">Thay đổi</button>
+              <button className="btn btn-primary" onClick={this.handleSubmit}>
+                Thay đổi
+              </button>
             </div>
           </div>
         </div>
@@ -50,4 +105,4 @@ class ChangePasswordModal extends Component {
   }
 }
 
-export default ChangePasswordModal;
+export default withRouter(ChangePasswordModal);

@@ -44,4 +44,40 @@ export const loginUser = (user) => async (dispatch) => {
   }
 };
 
+export const getInfo = () => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    const { data } = await api.getMe();
+    dispatch(login(data));
+    dispatch(endLoading());
+    return data;
+  } catch (error) {
+    dispatch(endLoading());
+    throw error;
+  }
+};
+
+export const logoutUser = () => (dispatch) => {
+  try {
+    dispatch(startLoading());
+    dispatch(logout());
+    dispatch(endLoading());
+  } catch (error) {
+    dispatch(endLoading());
+    throw error;
+  }
+};
+
+export const changePassword = (formData) => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    const { data } = await api.changePassword(formData);
+    dispatch(endLoading());
+    return data;
+  } catch (error) {
+    dispatch(endLoading());
+    throw error;
+  }
+};
+
 export default authSlice.reducer;
