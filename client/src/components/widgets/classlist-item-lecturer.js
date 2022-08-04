@@ -16,7 +16,11 @@ class LecturerClasslistItem extends Component {
         <td>{this.props.semester}</td>
         <td>{this.props.address}</td>
         <td>
-          <button className="btn btn-warning" data-toggle="modal" data-target="#editClassModal">
+          <button
+            className="btn btn-warning mr-2"
+            data-toggle="modal"
+            data-target="#editClassModal"
+          >
             <i className="fa fa-fw fa-edit"></i>
           </button>
           <button className="btn btn-danger" onClick={this.deleteClass}>

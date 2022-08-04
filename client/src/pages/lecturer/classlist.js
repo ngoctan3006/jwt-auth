@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AddClassModal from '../../components/modals/add-class-modal';
 import EditClassModal from '../../components/modals/edit-class-modal';
@@ -7,11 +8,14 @@ import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarLecturer from '../../components/sections/sidebar-lecturer';
 import LecturerClasslistItem from '../../components/widgets/classlist-item-lecturer';
+import { getClasses } from './lecturerSlice';
 
 class LecturerClasslist extends React.Component {
   constructor(props) {
     super(props);
     this.deleteClass = this.deleteClass.bind(this);
+
+    this.props.getClasses();
   }
 
   deleteClass() {
@@ -51,30 +55,15 @@ class LecturerClasslist extends React.Component {
                         </tr>
                       </thead>
                       <tbody>
-                        <LecturerClasslistItem
-                          id="103175"
-                          subject="Kỹ thuật lập trình"
-                          semester="20222"
-                          address="D3-201"
-                        />
-                        <LecturerClasslistItem
-                          id="103175"
-                          subject="Kỹ thuật lập trình"
-                          semester="20222"
-                          address="D3-201"
-                        />
-                        <LecturerClasslistItem
-                          id="103175"
-                          subject="Kỹ thuật lập trình"
-                          semester="20222"
-                          address="D3-201"
-                        />
-                        <LecturerClasslistItem
-                          id="103175"
-                          subject="Kỹ thuật lập trình"
-                          semester="20222"
-                          address="D3-201"
-                        />
+                        {this.props.classList.map((item) => (
+                          <LecturerClasslistItem
+                            key={item.code}
+                            id={item.code}
+                            subject={item.subjectName}
+                            semester={item.semester}
+                            address={item.room}
+                          />
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -95,4 +84,10 @@ class LecturerClasslist extends React.Component {
   }
 }
 
-export default LecturerClasslist;
+const mapStateToProps = (state) => ({
+  classList: state.lecturer.classList,
+});
+
+const mapDispatchToProps = { getClasses };
+
+export default connect(mapStateToProps, mapDispatchToProps)(LecturerClasslist);

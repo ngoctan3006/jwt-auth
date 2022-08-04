@@ -17,12 +17,25 @@ export const lecturerSlice = createSlice({
     endLoading: (state) => {
       state.loading = false;
     },
-    setInfo: (state, action) => {
-      state.info = action.payload;
+    getClassList: (state, action) => {
+      state.classList = action.payload;
     },
   },
 });
 
-export const { startLoading, endLoading, setInfo } = lecturerSlice.actions;
+export const { startLoading, endLoading, getClassList } = lecturerSlice.actions;
+
+export const getClasses = () => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    const { data } = await api.getClassList();
+    dispatch(getClassList(data));
+    dispatch(endLoading());
+    return data;
+  } catch (error) {
+    dispatch(endLoading());
+    throw error;
+  }
+};
 
 export default lecturerSlice.reducer;
