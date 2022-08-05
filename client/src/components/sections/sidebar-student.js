@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class SidebarStudent extends React.Component {
@@ -15,7 +16,7 @@ class SidebarStudent extends React.Component {
           <div className="sidebar-brand-icon">
             <i className="fas fa-user"></i>
           </div>
-          <div id="lecture-name" className="sidebar-brand-text mx-3"></div>
+          <div className="sidebar-brand-text mx-3">{this.props.user.fullname}</div>
         </Link>
         <hr className="sidebar-divider my-0" />
         <li className="nav-item">
@@ -80,4 +81,8 @@ class SidebarStudent extends React.Component {
   }
 }
 
-export default SidebarStudent;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps)(SidebarStudent);
