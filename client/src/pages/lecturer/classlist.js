@@ -8,7 +8,7 @@ import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarLecturer from '../../components/sections/sidebar-lecturer';
 import LecturerClasslistItem from '../../components/widgets/classlist-item-lecturer';
-import { classListSelector, getClasses, updateClass } from './lecturerSlice';
+import { classListSelector, deleteClass, getClasses, updateClass } from './lecturerSlice';
 
 const LecturerClasslist = () => {
   const [currentClass, setCurrentClass] = useState({});
@@ -25,9 +25,10 @@ const LecturerClasslist = () => {
     dispatch(updateClass(id, data));
   };
 
-  const deleteClass = () => {
+  const remove = (id) => {
     var cf = window.confirm('Bạn muốn xóa lớp này?');
     if (!cf) return;
+    dispatch(deleteClass(id));
   };
 
   return (
@@ -69,6 +70,7 @@ const LecturerClasslist = () => {
                           room={item.room}
                           setCurrentClass={() => setCurrentClass({ ...item })}
                           showModalEditClass={() => setIsOpenEditClassModal(true)}
+                          remove={() => remove(item.id)}
                         />
                       ))}
                     </tbody>
