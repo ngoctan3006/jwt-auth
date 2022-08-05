@@ -1,5 +1,6 @@
 import * as api from './authAPI';
 import { createSlice } from '@reduxjs/toolkit';
+import { API } from '../../apis';
 
 const initialState = {
   loading: false,
@@ -30,13 +31,40 @@ export const authSlice = createSlice({
 
 export const { startLoading, endLoading, login, logout } = authSlice.actions;
 
+export const loadUser = () => async (dispatch) => {
+  const token = localStorage.getItem('token');
+
+  API.interceptors.request.use((req) => {
+    if (token) {
+      req.headers.authorization = `Bearer ${token}`;
+    }
+    return req;
+  });
+
+  try {
+    dispatch(startLoading());
+    const { data } = await api.getMe();
+    dispatch(login(data));
+    dispatch(endLoading());
+    return data;
+  } catch (error) {
+    dispatch(endLoading());
+    throw error;
+  }
+};
+
 export const loginUser = (user) => async (dispatch) => {
   try {
     dispatch(startLoading());
     const { data } = await api.login(user);
-    dispatch(login(data));
+    dispatch(login(data.user));
     dispatch(endLoading());
     localStorage.setItem('token', data.token);
+    API.interceptors.request.use((req) => {
+      req.headers.authorization = `Bearer ${data.token}`;
+
+      return req;
+    });
     return data;
   } catch (error) {
     dispatch(endLoading());

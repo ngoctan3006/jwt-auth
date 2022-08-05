@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from '../../utils/withRouter';
-import { loginUser } from './authSlice';
+import { loginUser, loadUser } from './authSlice';
 
 class Login extends React.Component {
   constructor(props) {
@@ -13,7 +13,27 @@ class Login extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.loadUser = this.loadUser.bind(this);
+
+    this.loadUser();
   }
+
+  loadUser = async () => {
+    try {
+      const { role } = await this.props.loadUser();
+
+      const { navigate } = this.props;
+      if (role === 2) {
+        navigate('/admin');
+      } else if (role === 1) {
+        navigate('/lecturer');
+      } else if (role === 0) {
+        navigate('/student');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -138,6 +158,6 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
-const mapDispatchToProps = { loginUser };
+const mapDispatchToProps = { loginUser, loadUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

@@ -50,7 +50,7 @@ class LecturerInfo extends React.Component {
                           id="username"
                           style={{ width: '50%' }}
                           disabled
-                          value={this.props.user.user.username}
+                          value={this.props.user.username}
                         />
                       </div>
                       <div className="form-group">
@@ -61,7 +61,7 @@ class LecturerInfo extends React.Component {
                           id="fullname"
                           style={{ width: '50%' }}
                           disabled
-                          value={this.props.user.user.fullname}
+                          value={this.props.user.fullname}
                         />
                       </div>
                       <div className="form-group">

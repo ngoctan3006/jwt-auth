@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-class LecturerClasslistItem extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
+class LecturerClasslistItem extends React.Component {
   render() {
     return (
-      <tr id={this.props.id}>
+      <tr id={this.props.code}>
         <td>
-          <Link to={`/lecturer/classdetail/${this.props.id}`}>{this.props.id}</Link>
+          <Link to={`/lecturer/classdetail/${this.props.code}`}>{this.props.code}</Link>
         </td>
-        <td>{this.props.subject}</td>
+        <td>{this.props.subjectName}</td>
         <td>{this.props.semester}</td>
-        <td>{this.props.address}</td>
+        <td>{this.props.room}</td>
         <td>
           <button
             className="btn btn-warning mr-2"
-            data-toggle="modal"
-            data-target="#editClassModal"
+            onClick={() => {
+              this.props.setCurrentClass(this.props.code);
+              this.props.showModalEditClass();
+            }}
           >
             <i className="fa fa-fw fa-edit"></i>
           </button>

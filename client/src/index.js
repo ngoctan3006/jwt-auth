@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider, useSelector } from 'react-redux';
@@ -19,10 +20,7 @@ import StudentClasslist from './pages/student/classlist';
 import StudentInfo from './pages/student/info';
 
 const ProtectedRoute = ({ children, role }) => {
-  // const dispatch = useDispatch();
-  // dispatch(getInfo());
   const user = useSelector((state) => state.auth.user);
-  // const token = localStorage.getItem('token');
   if (!user && user?.role !== role) {
     return <Navigate to="/login" />;
   }
