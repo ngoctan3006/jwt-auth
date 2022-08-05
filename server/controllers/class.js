@@ -68,16 +68,18 @@ export const createClass = async (req, res) => {
       return res.status(400).json({ message: 'Lớp đã tồn tại!' });
     }
 
-    await create(CLASS, {
+    const newClass = {
       id: uuidv4(),
       code: classCode,
       room,
       semester,
       teacherCode: user.code,
       subjectName,
-    });
+    };
 
-    await res.json({ message: 'Tạo lớp thành công!' });
+    await create(CLASS, newClass);
+
+    await res.json(newClass);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });

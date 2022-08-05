@@ -8,7 +8,13 @@ import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarLecturer from '../../components/sections/sidebar-lecturer';
 import LecturerClasslistItem from '../../components/widgets/classlist-item-lecturer';
-import { classListSelector, deleteClass, getClasses, updateClass } from './lecturerSlice';
+import {
+  classListSelector,
+  createClass,
+  deleteClass,
+  getClasses,
+  updateClass,
+} from './lecturerSlice';
 
 const LecturerClasslist = () => {
   const [currentClass, setCurrentClass] = useState({});
@@ -20,6 +26,10 @@ const LecturerClasslist = () => {
   useEffect(() => {
     dispatch(getClasses());
   }, []);
+
+  const addClass = (formData) => {
+    dispatch(createClass(formData));
+  };
 
   const updateInfo = (id, data) => {
     dispatch(updateClass(id, data));
@@ -78,7 +88,11 @@ const LecturerClasslist = () => {
                 </div>
               </div>
             </div>
-            <AddClassModal />
+            <AddClassModal
+              show={isOpenAddClassModal}
+              setShow={setIsOpenAddClassModal}
+              add={addClass}
+            />
             <EditClassModal
               classInfo={currentClass}
               update={updateInfo}

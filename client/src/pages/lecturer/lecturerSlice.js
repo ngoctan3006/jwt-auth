@@ -22,7 +22,7 @@ export const lecturerSlice = createSlice({
     getClassList: (state, action) => {
       state.classList = action.payload;
     },
-    createClass: (state, action) => {
+    add: (state, action) => {
       state.classList.push(action.payload);
     },
     update: (state, action) => {
@@ -36,7 +36,8 @@ export const lecturerSlice = createSlice({
   },
 });
 
-export const { startLoading, endLoading, getClassList, update, remove } = lecturerSlice.actions;
+export const { startLoading, endLoading, getClassList, add, update, remove } =
+  lecturerSlice.actions;
 
 export const classListSelector = (state) => state.lecturer.classList;
 
@@ -46,6 +47,20 @@ export const getClasses = () => async (dispatch) => {
     const { data } = await api.getClassList();
     dispatch(getClassList(data));
     dispatch(endLoading());
+    return data;
+  } catch (error) {
+    dispatch(endLoading());
+    throw error;
+  }
+};
+
+export const createClass = (formData) => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    const { data } = await api.createClass(formData);
+    dispatch(add(data));
+    dispatch(endLoading());
+    alert('Thêm lớp học thành công');
     return data;
   } catch (error) {
     dispatch(endLoading());
