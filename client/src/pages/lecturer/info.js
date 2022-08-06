@@ -9,16 +9,11 @@ import { changePassword, logoutUser, userSelector } from '../auth/authSlice';
 
 const LecturerInfo = () => {
   const [isOpenChangePasswordModal, setIsOpenChangePasswordModal] = useState(false);
-  const dispatch = useDispatch();
   const user = useSelector(userSelector);
+  const dispatch = useDispatch();
 
   const handleChangePassword = (formData) => {
-    try {
-      dispatch(changePassword(formData));
-      // setIsOpenChangePasswordModal(false);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(changePassword(formData));
   };
 
   return (

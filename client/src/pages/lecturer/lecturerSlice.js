@@ -98,7 +98,6 @@ export const getClasses = () => async (dispatch) => {
     const { data } = await api.getClassList();
     dispatch(getClassList(data));
     dispatch(endLoading());
-    return data;
   } catch (error) {
     dispatch(endLoading());
     throw error;

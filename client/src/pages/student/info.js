@@ -1,84 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ChangePasswordModal from '../../components/modals/change-password-modal';
-import LogoutModal from '../../components/modals/logout-modal';
 import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarStudent from '../../components/sections/sidebar-student';
+import { userSelector, logoutUser, changePassword } from '../auth/authSlice';
 
-class StudentInfo extends React.Component {
-  render() {
-    return (
-      <div id="page-top">
-        <div id="wrapper">
-          <SidebarStudent />
-          <div id="content-wrapper" className="d-flex flex-column">
-            <div id="content">
-              <SearchBar />
-              <div className="container-fluid">
-                <div className="row">
-                  <div className="col-md-12 mb-4">
-                    <h3 style={{ fontWeight: 'bolder' }}>Thông tin cá nhân - Sinh viên</h3>
-                    <hr />
-                  </div>
-                  <div className="col-md-8">
-                    <form id="addStudentForm">
-                      <div className="form-group">
-                        <label>Tên đăng nhập</label>
-                        <input
-                          type="text"
-                          className="form-control mb-4"
-                          id="username"
-                          style={{ width: '50%' }}
-                          disabled
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Mã sinh viên</label>
-                        <input
-                          type="text"
-                          className="form-control mb-4"
-                          id="student-id"
-                          style={{ width: '50%' }}
-                          disabled
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label>Họ tên</label>
-                        <input
-                          type="text"
-                          className="form-control mb-5"
-                          id="fullname"
-                          style={{ width: '50%' }}
-                          disabled
-                        />
-                      </div>
-                      <div className="form-group">
-                        <button
-                          type="button"
-                          className="btn btn-primary"
-                          data-toggle="modal"
-                          data-target="#changePassModal"
-                        >
-                          Thay đổi mật khẩu
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+const StudentInfo = () => {
+  const [isOpenChangePasswordModal, setIsOpenChangePasswordModal] = useState(false);
+  const user = useSelector(userSelector);
+  const dispatch = useDispatch();
+
+  const handleChangePassword = (formData) => {
+    dispatch(changePassword(formData));
+  };
+
+  return (
+    <div id="page-top">
+      <div id="wrapper">
+        <SidebarStudent />
+        <div id="content-wrapper" className="d-flex flex-column">
+          <div id="content">
+            <SearchBar />
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-md-12 mb-4">
+                  <h3 style={{ fontWeight: 'bolder' }}>Thông tin cá nhân - Sinh viên</h3>
+                  <hr />
+                </div>
+                <div className="col-md-8">
+                  <form id="addStudentForm">
+                    <div className="form-group">
+                      <label>Tên đăng nhập</label>
+                      <input
+                        type="text"
+                        className="form-control mb-4"
+                        id="username"
+                        style={{ width: '50%' }}
+                        disabled
+                        value={user.username}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Mã sinh viên</label>
+                      <input
+                        type="text"
+                        className="form-control mb-4"
+                        id="student-id"
+                        style={{ width: '50%' }}
+                        disabled
+                        value={user.code}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Họ tên</label>
+                      <input
+                        type="text"
+                        className="form-control mb-5"
+                        id="fullname"
+                        style={{ width: '50%' }}
+                        disabled
+                        value={user.fullname}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={() => setIsOpenChangePasswordModal(true)}
+                      >
+                        Thay đổi mật khẩu
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
-              <ChangePasswordModal />
             </div>
-            <Footer />
+            <ChangePasswordModal
+              show={isOpenChangePasswordModal}
+              setShow={setIsOpenChangePasswordModal}
+              changePassword={handleChangePassword}
+              logout={logoutUser}
+            />
           </div>
+          <Footer />
         </div>
-        <Link className="scroll-to-top rounded" to="#page-top">
-          <i className="fas fa-angle-up"></i>
-        </Link>
-        <LogoutModal />
       </div>
-    );
-  }
-}
+      <Link className="scroll-to-top rounded" to="#page-top">
+        <i className="fas fa-angle-up"></i>
+      </Link>
+    </div>
+  );
+};
 
 export default StudentInfo;

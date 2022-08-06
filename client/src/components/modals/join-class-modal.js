@@ -5,7 +5,7 @@ const JoinClassModal = () => {
     <div
       className="modal fade"
       id="registerModal"
-      tabindex="-1"
+      tabIndex="-1"
       role="dialog"
       aria-labelledby=""
       aria-hidden="true"
@@ -23,7 +23,7 @@ const JoinClassModal = () => {
           <div className="modal-body">
             <form id="addClassForm">
               <div className="form-group">
-                <label for="class-id">Mã lớp học</label>
+                <label htmlFor="class-id">Mã lớp học</label>
                 <input
                   type="text"
                   className="form-control"
@@ -32,7 +32,7 @@ const JoinClassModal = () => {
                 />
               </div>
               <div className="form-group">
-                <label for="class-title">Tên môn học</label>
+                <label htmlFor="class-title">Tên môn học</label>
                 <input
                   type="text"
                   className="form-control"

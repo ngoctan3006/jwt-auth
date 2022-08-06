@@ -70,18 +70,26 @@ const LecturerClasslist = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {classList.map((item) => (
-                        <LecturerClasslistItem
-                          key={item.code}
-                          code={item.code}
-                          subjectName={item.subjectName}
-                          semester={item.semester}
-                          room={item.room}
-                          setCurrentClass={() => setCurrentClass({ ...item })}
-                          showModalEditClass={() => setIsOpenEditClassModal(true)}
-                          remove={() => remove(item.id)}
-                        />
-                      ))}
+                      {classList?.length ? (
+                        classList.map((item) => (
+                          <LecturerClasslistItem
+                            key={item.code}
+                            code={item.code}
+                            subjectName={item.subjectName}
+                            semester={item.semester}
+                            room={item.room}
+                            setCurrentClass={() => setCurrentClass({ ...item })}
+                            showModalEditClass={() => setIsOpenEditClassModal(true)}
+                            remove={() => remove(item.id)}
+                          />
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={6} className="text-center">
+                            Không có dữ liệu
+                          </td>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>

@@ -38,7 +38,7 @@ POST {{baseUrl}}/users/signin
 Content-Type: application/json
 
 {
-  "username": "huy.nx192244",
+  "username": "linh.nt200001",
   "password": "123456",
   "role": 0
 }
