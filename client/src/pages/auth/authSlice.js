@@ -68,9 +68,9 @@ export const loginUser = (user) => async (dispatch) => {
       req.headers.authorization = `Bearer ${data.token}`;
       return req;
     });
-    return data;
   } catch (error) {
     dispatch(endLoading());
+    alert(error.response.data.message || 'Lỗi!');
     throw error;
   }
 };
