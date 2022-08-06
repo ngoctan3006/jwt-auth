@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class AccountlistItem extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
-  render() {
-    return (
-      <tr id={this.props.id}>
-        <td>{this.props.id}</td>
-        <td>{this.props.name}</td>
-        <td>{this.props.username}</td>
-        <td>{this.props.role === 'Role_Lecturer' ? 'Giảng viên' : 'Sinh viên'}</td>
-        <td>
-          <button className="btn btn-danger" onClick={this.deleteAccount}>
-            <i className="fa fa-fw fa-trash"></i>
-          </button>
-        </td>
-      </tr>
-    );
-  }
-}
+const AccountlistItem = ({ id, name, username, role, deleteAccount }) => {
+  return (
+    <tr id={id}>
+      <td>{id}</td>
+      <td>{name}</td>
+      <td>{username}</td>
+      <td>{role === 'Role_Lecturer' ? 'Giảng viên' : 'Sinh viên'}</td>
+      <td>
+        <button className="btn btn-danger" onClick={deleteAccount}>
+          <i className="fa fa-fw fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  );
+};
 
 export default AccountlistItem;

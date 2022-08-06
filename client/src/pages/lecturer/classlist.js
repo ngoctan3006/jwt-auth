@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AddClassModal from '../../components/modals/add-class-modal';
 import EditClassModal from '../../components/modals/edit-class-modal';
-import LogoutModal from '../../components/modals/logout-modal';
 import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarLecturer from '../../components/sections/sidebar-lecturer';
@@ -106,7 +105,6 @@ const LecturerClasslist = () => {
       <Link className="scroll-to-top rounded" to="#page-top">
         <i className="fas fa-angle-up"></i>
       </Link>
-      <LogoutModal />
     </div>
   );
 };

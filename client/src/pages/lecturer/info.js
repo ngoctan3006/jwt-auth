@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ChangePasswordModal from '../../components/modals/change-password-modal';
-import LogoutModal from '../../components/modals/logout-modal';
 import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarLecturer from '../../components/sections/sidebar-lecturer';
@@ -10,7 +9,6 @@ import { changePassword, logoutUser, userSelector } from '../auth/authSlice';
 
 const LecturerInfo = () => {
   const [isOpenChangePasswordModal, setIsOpenChangePasswordModal] = useState(false);
-  const [isOpenLogoutModal, setIsOpenLogoutModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
 
@@ -86,7 +84,6 @@ const LecturerInfo = () => {
       <Link className="scroll-to-top rounded" to="#page-top">
         <i className="fas fa-angle-up"></i>
       </Link>
-      <LogoutModal show={isOpenLogoutModal} setShow={setIsOpenLogoutModal} />
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom';
 import AddStudentModal from '../../components/modals/add-student-modal';
 import EditStudentModal from '../../components/modals/edit-student-modal';
 import InputMarkModal from '../../components/modals/input-mark';
-import LogoutModal from '../../components/modals/logout-modal';
 import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarLecturer from '../../components/sections/sidebar-lecturer';
@@ -13,6 +12,7 @@ import {
   acceptStudentJoinClass,
   addStudentToClass,
   currentClassSelector,
+  deletePending,
   deleteStudent,
   getCurrent,
   getStudents,
@@ -20,7 +20,6 @@ import {
   inputStudentScore,
   studentListSelector,
   studentPendingSelector,
-  deletePending,
 } from './lecturerSlice';
 
 const LecturerClassDetail = () => {
@@ -159,7 +158,6 @@ const LecturerClassDetail = () => {
       <Link className="scroll-to-top rounded" to="#page-top">
         <i className="fas fa-angle-up"></i>
       </Link>
-      <LogoutModal />
     </div>
   );
 };
