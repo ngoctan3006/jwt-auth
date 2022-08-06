@@ -62,7 +62,6 @@ export const loginUser = (user) => async (dispatch) => {
     localStorage.setItem('token', data.token);
     API.interceptors.request.use((req) => {
       req.headers.authorization = `Bearer ${data.token}`;
-
       return req;
     });
     return data;
