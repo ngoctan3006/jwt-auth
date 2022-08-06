@@ -44,7 +44,6 @@ class InputMarkModal extends React.Component {
                           className="form-control"
                           id="mark1"
                           style={{ width: '100%' }}
-                          value=""
                         />
                       </td>
                       <td>
@@ -53,7 +52,6 @@ class InputMarkModal extends React.Component {
                           className="form-control"
                           id="mark2"
                           style={{ width: '100%' }}
-                          value=""
                         />
                       </td>
                     </tr>
@@ -67,7 +65,6 @@ class InputMarkModal extends React.Component {
                           className="form-control"
                           id="mark1"
                           style={{ width: '100%' }}
-                          value=""
                         />
                       </td>
                       <td>
@@ -76,7 +73,6 @@ class InputMarkModal extends React.Component {
                           className="form-control"
                           id="mark2"
                           style={{ width: '100%' }}
-                          value=""
                         />
                       </td>
                     </tr>
@@ -90,7 +86,6 @@ class InputMarkModal extends React.Component {
                           className="form-control"
                           id="mark1"
                           style={{ width: '100%' }}
-                          value=""
                         />
                       </td>
                       <td>
@@ -99,7 +94,6 @@ class InputMarkModal extends React.Component {
                           className="form-control"
                           id="mark2"
                           style={{ width: '100%' }}
-                          value=""
                         />
                       </td>
                     </tr>

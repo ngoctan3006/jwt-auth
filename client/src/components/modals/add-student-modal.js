@@ -31,7 +31,7 @@ const AddStudentModal = ({ addStudent, studentPending, removePending, acceptStud
           <div className="modal-body">
             <form id="addStudentForm">
               <div className="form-group">
-                <label for="student-id">Mã sinh viên</label>
+                <label htmlFor="student-id">Mã sinh viên</label>
                 <input
                   type="text"
                   className="form-control"

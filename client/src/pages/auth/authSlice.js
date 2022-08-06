@@ -31,6 +31,8 @@ export const authSlice = createSlice({
 
 export const { startLoading, endLoading, login, logout } = authSlice.actions;
 
+export const userSelector = (state) => state.auth.user;
+
 export const loadUser = () => async (dispatch) => {
   const token = localStorage.getItem('token');
 
@@ -100,9 +102,12 @@ export const changePassword = (formData) => async (dispatch) => {
     dispatch(startLoading());
     const { data } = await api.changePassword(formData);
     dispatch(endLoading());
+    alert(data.message);
+    dispatch(logout());
     return data;
   } catch (error) {
     dispatch(endLoading());
+    alert(error?.response?.data?.message || 'Thất bại!');
     throw error;
   }
 };
