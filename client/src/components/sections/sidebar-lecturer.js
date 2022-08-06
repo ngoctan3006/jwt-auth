@@ -1,10 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { userSelector } from '../../pages/auth/authSlice';
+import LogoutModal from '../modals/logout-modal';
 
-class SidebarLecturer extends React.Component {
-  render() {
-    return (
+const SidebarLecturer = () => {
+  const [show, setShow] = useState(false);
+  const user = useSelector(userSelector);
+
+  return (
+    <>
       <ul
         className="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion"
         id="accordionSidebar"
@@ -16,7 +21,7 @@ class SidebarLecturer extends React.Component {
           <div className="sidebar-brand-icon">
             <i className="fas fa-user"></i>
           </div>
-          <div className="sidebar-brand-text mx-3">{this.props.user.fullname}</div>
+          <div className="sidebar-brand-text mx-3">{user.fullname}</div>
         </Link>
         <hr className="sidebar-divider my-0" />
         <li className="nav-item">
@@ -41,7 +46,7 @@ class SidebarLecturer extends React.Component {
               <Link className="collapse-item" to="/lecturer/info">
                 Thông tin cá nhân
               </Link>
-              <Link to="#" className="collapse-item" data-toggle="modal" data-target="#logoutModal">
+              <Link to="#" className="collapse-item" onClick={() => setShow(true)}>
                 Đăng xuất
               </Link>
             </div>
@@ -77,12 +82,9 @@ class SidebarLecturer extends React.Component {
           <button className="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
       </ul>
-    );
-  }
-}
+      <LogoutModal show={show} setShow={setShow} />
+    </>
+  );
+};
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-});
-
-export default connect(mapStateToProps)(SidebarLecturer);
+export default SidebarLecturer;

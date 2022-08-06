@@ -39,6 +39,8 @@ export const loadUser = () => async (dispatch) => {
   API.interceptors.request.use((req) => {
     if (token) {
       req.headers.authorization = `Bearer ${token}`;
+    } else {
+      delete req.headers.authorization;
     }
     return req;
   });

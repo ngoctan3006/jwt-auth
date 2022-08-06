@@ -22,9 +22,6 @@ const ChangePasswordModal = ({ show, setShow, changePassword, logout }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     changePassword(formData);
-    handleClose();
-    // this.props.logout();
-    // navigate('/login');
   };
 
   return (
@@ -72,72 +69,6 @@ const ChangePasswordModal = ({ show, setShow, changePassword, logout }) => {
         </Button>
       </Modal.Footer>
     </Modal>
-    // <div
-    //   className="modal fade"
-    //   id="changePassModal"
-    //   tabIndex="-1"
-    //   role="dialog"
-    //   aria-labelledby=""
-    //   aria-hidden="true"
-    // >
-    //   <div className="modal-dialog" role="document">
-    //     <div className="modal-content">
-    //       <div className="modal-header">
-    //         <h5 className="modal-title" id="exampleModalLabel" style={{ fontWeight: 'bold' }}>
-    //           Thay đổi mật khẩu
-    //         </h5>
-    //         <button className="close" type="button" data-dismiss="modal" aria-label="Close">
-    //           <span aria-hidden="true">×</span>
-    //         </button>
-    //       </div>
-    //       <div className="modal-body">
-    //         <form id="change-password">
-    //           <div className="form-group">
-    //             <label>Nhập mật khẩu cũ</label>
-    //             <input
-    //               type="password"
-    //               className="form-control"
-    //               id="old-pass"
-    //               name="oldPassword"
-    //               value={formData.oldPassword}
-    //               onChange={handleChange}
-    //             />
-    //           </div>
-    //           <div className="form-group">
-    //             <label>Nhập mật khẩu mới</label>
-    //             <input
-    //               type="password"
-    //               className="form-control"
-    //               id="new-pass"
-    //               name="password"
-    //               value={formData.password}
-    //               onChange={handleChange}
-    //             />
-    //           </div>
-    //           <div className="form-group">
-    //             <label>Nhập lại mật khẩu mới</label>
-    //             <input
-    //               type="password"
-    //               className="form-control"
-    //               id="cf-pass"
-    //               name="confirmPassword"
-    //               value={formData.confirmPassword}
-    //               onChange={handleChange}
-    //             />
-    //           </div>
-    //         </form>
-    //       </div>
-    //       <div className="modal-footer">
-    //         <button className="btn btn-secondary" data-dismiss="modal">
-    //           Bỏ qua
-    //         </button>
-    //         <button className="btn btn-primary" onClick={handleSubmit}>
-    //           Thay đổi
-    //         </button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
