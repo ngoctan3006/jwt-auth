@@ -43,7 +43,7 @@ Content-Type: application/json
 ###
 
 # @name addStudent
-POST {{baseUrl}}/class/addStudent
+POST {{baseUrl}}/class/add-student
 Authorization: Bearer {{token}}
 Content-Type: application/json
 

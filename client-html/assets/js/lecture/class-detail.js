@@ -124,7 +124,7 @@ getClassInfo();
 const addStudent = async (e) => {
   e.preventDefault();
   try {
-    await API.post('class/addStudent', {
+    await API.post('class/add-student', {
       classCode,
       studentCode: $('#student-code').val(),
     });

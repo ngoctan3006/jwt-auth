@@ -175,14 +175,17 @@ export const addStudentToClass = async (req, res) => {
       return res.status(400).json({ message: 'Sinh viên đã có trong lớp!' });
     }
 
-    await create(CLASS_STUDENT, {
+    const newStudent = {
       id: uuidv4(),
       classCode,
       studentCode,
       status: 1,
-    });
+    };
 
-    res.json({ message: 'Thêm sinh viên vào lớp thành công!' });
+    await create(CLASS_STUDENT, newStudent);
+    const student = await findOne(STUDENT, { code: studentCode });
+
+    res.json({ ...newStudent, ...student, midterm: null, final: null });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });

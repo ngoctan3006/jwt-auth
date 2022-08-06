@@ -26,7 +26,7 @@ export const lecturerSlice = createSlice({
     getCurrentClass: (state, action) => {
       state.currentClass = action.payload;
     },
-    add: (state, action) => {
+    addClass: (state, action) => {
       state.classList.push(action.payload);
     },
     update: (state, action) => {
@@ -43,6 +43,14 @@ export const lecturerSlice = createSlice({
     getStudentPending: (state, action) => {
       state.studentPending = action.payload;
     },
+    addStudent: (state, action) => {
+      state.studentList.push(action.payload);
+    },
+    acceptStudent: (state, action) => {
+      const index = state.studentPending.findIndex((item) => item.code === action.payload.code);
+      state.studentList.push(state.studentPending[index]);
+      state.studentPending.splice(index, 1);
+    },
     inputScore: (state, action) => {
       const index = state.studentList.findIndex((item) => item.id === action.payload.id);
       state.studentList[index] = action.payload;
@@ -53,6 +61,12 @@ export const lecturerSlice = createSlice({
       );
       state.studentList.splice(index, 1);
     },
+    removePending: (state, action) => {
+      const index = state.studentPending.findIndex(
+        (item) => item.studentCode === action.payload.studentCode
+      );
+      state.studentPending.splice(index, 1);
+    },
   },
 });
 
@@ -60,14 +74,17 @@ export const {
   startLoading,
   endLoading,
   getClassList,
-  add,
+  addClass,
   update,
   remove,
   getCurrentClass,
   getStudentList,
   getStudentPending,
+  addStudent,
+  acceptStudent,
   inputScore,
   removeStudent,
+  removePending,
 } = lecturerSlice.actions;
 
 export const classListSelector = (state) => state.lecturer.classList;
@@ -105,7 +122,7 @@ export const createClass = (formData) => async (dispatch) => {
   try {
     dispatch(startLoading());
     const { data } = await api.createClass(formData);
-    dispatch(add(data));
+    dispatch(addClass(data));
     dispatch(endLoading());
     alert('Thêm lớp học thành công');
     return data;
@@ -168,6 +185,34 @@ export const getStudentsPending = (code) => async (dispatch) => {
   }
 };
 
+export const addStudentToClass = (formData) => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    const { data } = await api.addStudent(formData);
+    dispatch(addStudent(data));
+    dispatch(endLoading());
+    alert('Thêm học sinh thành công');
+    return data;
+  } catch (error) {
+    dispatch(endLoading());
+    alert(error?.response?.data?.message || 'Thêm học sinh thất bại');
+  }
+};
+
+export const acceptStudentJoinClass = (formData) => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    const { data } = await api.acceptStudent(formData);
+    dispatch(acceptStudent(formData));
+    dispatch(endLoading());
+    alert('Thêm sinh viên thành công!');
+    return data;
+  } catch (error) {
+    dispatch(endLoading());
+    alert(error?.response?.data?.message || 'Thất bại!');
+  }
+};
+
 export const inputStudentScore = (formData) => async (dispatch) => {
   try {
     dispatch(startLoading());
@@ -185,6 +230,18 @@ export const deleteStudent = (formData) => async (dispatch) => {
     dispatch(startLoading());
     await api.deleteStudent(formData);
     dispatch(removeStudent(formData));
+    dispatch(endLoading());
+  } catch (error) {
+    dispatch(endLoading());
+    throw error;
+  }
+};
+
+export const deletePending = (formData) => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    await api.deleteStudent(formData);
+    dispatch(removePending(formData));
     dispatch(endLoading());
   } catch (error) {
     dispatch(endLoading());

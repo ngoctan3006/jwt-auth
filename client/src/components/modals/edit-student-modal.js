@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
 const EditStudentModal = ({ show, setShow, studentInfo, updateScore }) => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ ...studentInfo });
 
   useEffect(() => setFormData({ ...studentInfo }), [studentInfo]);
 

@@ -20,7 +20,7 @@ const router = express.Router();
 router.get('/', auth, getClasses);
 router.get('/student', auth, getClassesStudent);
 router.post('/', auth, createClass);
-router.post('/addStudent', auth, addStudentToClass);
+router.post('/add-student', auth, addStudentToClass);
 router.post('/delete-student', auth, removeStudentFromClass);
 router.post('/request-join-class', auth, requestJoinClass);
 router.post('/out-class', auth, outClass);

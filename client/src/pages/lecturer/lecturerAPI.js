@@ -10,4 +10,6 @@ export const getStudentList = (code) => API.get(`/students/student-list/${code}?
 export const getStudentPending = (code) => API.get(`/students/student-list/${code}?status=0`);
 
 export const inputScore = (data) => API.put('/class/input-score', data);
+export const addStudent = (data) => API.post('/class/add-student', data);
+export const acceptStudent = (data) => API.put('/class/accept-student', data);
 export const deleteStudent = (data) => API.post('/class/delete-student', data);
