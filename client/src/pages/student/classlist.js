@@ -6,7 +6,7 @@ import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarStudent from '../../components/sections/sidebar-student';
 import StudentClasslistItem from '../../components/widgets/classlist-item-student';
-import { classListSelector, getClasses, outClass } from './studentSlice';
+import { classListSelector, getClasses, joinClass, outClass } from './studentSlice';
 
 const StudentClasslist = () => {
   const [isOpenJoinClassModal, setIsOpenJoinClassModal] = useState(false);
@@ -16,6 +16,10 @@ const StudentClasslist = () => {
   useEffect(() => {
     dispatch(getClasses());
   }, []);
+
+  const addClass = (classCode) => {
+    dispatch(joinClass(classCode));
+  };
 
   const deleteClass = (code) => {
     var cf = window.confirm('Bạn muốn rời lớp này?');
@@ -36,8 +40,7 @@ const StudentClasslist = () => {
                   <button
                     className="btn btn-success"
                     style={{ width: '200px' }}
-                    data-toggle="modal"
-                    data-target="#registerModal"
+                    onClick={() => setIsOpenJoinClassModal(true)}
                   >
                     <i className="fa fa-plus"></i> Đăng ký lớp học
                   </button>
@@ -77,7 +80,11 @@ const StudentClasslist = () => {
                 </div>
               </div>
             </div>
-            <JoinClassModal show={isOpenJoinClassModal} setShow={setIsOpenJoinClassModal} />
+            <JoinClassModal
+              show={isOpenJoinClassModal}
+              setShow={setIsOpenJoinClassModal}
+              addClass={addClass}
+            />
           </div>
           <Footer />
         </div>

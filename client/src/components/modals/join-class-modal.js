@@ -1,58 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
-const JoinClassModal = () => {
+const JoinClassModal = ({ show, setShow, addClass }) => {
+  const [code, setCode] = useState('');
+  const handleClose = () => setShow(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addClass(code);
+    setCode('');
+  };
+
   return (
-    <div
-      className="modal fade"
-      id="registerModal"
-      tabIndex="-1"
-      role="dialog"
-      aria-labelledby=""
-      aria-hidden="true"
-    >
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel" style={{ fontWeight: 'bold' }}>
-              Đăng ký lớp học
-            </h5>
-            <button className="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <form id="addClassForm">
-              <div className="form-group">
-                <label htmlFor="class-id">Mã lớp học</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="class-id"
-                  style={{ width: '100%' }}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="class-title">Tên môn học</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="class-title"
-                  style={{ width: '100%' }}
-                />
-              </div>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button className="btn btn-secondary" data-dismiss="modal">
-              Bỏ qua
-            </button>
-            <button className="btn btn-primary" data-dismiss="modal">
-              Đăng ký
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title className="fw-bold">Thay đổi mật khẩu</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          <Form.Group className="mb-3" controlId="class-code">
+            <Form.Label>Mã lớp</Form.Label>
+            <Form.Control type="text" value={code} onChange={(e) => setCode(e.target.value)} />
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Bỏ qua
+        </Button>
+        <Button variant="primary" onClick={handleSubmit}>
+          Đăng ký
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
