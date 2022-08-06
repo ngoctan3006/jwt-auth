@@ -1,13 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Footer from '../../components/sections/footer';
 import SearchBar from '../../components/sections/searchbar';
 import SidebarStudent from '../../components/sections/sidebar-student';
+import { classSelector, getScore, outClass } from './studentSlice';
 
 const StudentClassDetail = () => {
+  const currentClass = useSelector(classSelector);
+  const dispatch = useDispatch();
+  const { id } = useParams(window.location.search);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getScore(id));
+  }, []);
+
   const leaveClass = () => {
     var cf = window.confirm('Bạn muốn rời khỏi lớp này?');
     if (!cf) return;
+    dispatch(outClass(currentClass.classCode));
+    navigate('/student/classlist');
   };
 
   return (
@@ -20,7 +33,9 @@ const StudentClassDetail = () => {
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-10 mb-4">
-                  <h3>103175 - KỸ THUẬT LẬP TRÌNH</h3>
+                  <h3>
+                    {currentClass?.classCode} - {currentClass?.subjectName?.toUpperCase()}
+                  </h3>
                   <hr />
                 </div>
                 <div className="col-md-2">
@@ -38,8 +53,8 @@ const StudentClassDetail = () => {
                         <td>Điểm cuối kỳ</td>
                       </tr>
                       <tr style={{ fontWeight: 'bolder', fontSize: '30px' }}>
-                        <td>6.5</td>
-                        <td>8.0</td>
+                        <td>{currentClass.midterm || 'Chưa nhập'}</td>
+                        <td>{currentClass.final || 'Chưa nhập'}</td>
                       </tr>
                     </tbody>
                   </table>

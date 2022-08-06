@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   loading: false,
   classList: [],
+  class: {},
 };
 
 export const studentSlice = createSlice({
@@ -15,6 +16,9 @@ export const studentSlice = createSlice({
     },
     endLoading: (state) => {
       state.loading = false;
+    },
+    getClass: (state, action) => {
+      state.class = action.payload;
     },
     getClassList: (state, action) => {
       state.classList = action.payload;
@@ -29,10 +33,23 @@ export const studentSlice = createSlice({
   },
 });
 
-export const { startLoading, endLoading, getClassList, addClass, removeClass } =
+export const { startLoading, endLoading, getClass, getClassList, addClass, removeClass } =
   studentSlice.actions;
 
 export const classListSelector = (state) => state.student.classList;
+export const classSelector = (state) => state.student.class;
+
+export const getScore = (classCode) => async (dispatch) => {
+  try {
+    dispatch(startLoading());
+    const { data } = await api.getClass(classCode);
+    dispatch(getClass(data));
+    dispatch(endLoading());
+  } catch (error) {
+    dispatch(endLoading());
+    console.log(error);
+  }
+};
 
 export const getClasses = () => async (dispatch) => {
   try {
